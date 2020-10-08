@@ -2,6 +2,9 @@
 
 Este es el proyecto web del sistema de vales
 
+#### Materia
+Taller integrador
+
 ## Prerequisitos
 
 1. PHP
