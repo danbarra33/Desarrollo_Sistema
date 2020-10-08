@@ -1,4 +1,4 @@
-# Proyecto de Vales
+# Proyecto de Vales Web
 
 Este es el proyecto web del sistema de vales
 
