@@ -4,7 +4,7 @@ Este es el proyecto web del sistema de vales
 
 ## Instalción
 
-Instalar [Composer] (https://getcomposer.org/).
+Instalar [Composer](https://getcomposer.org/).
 
 Clonar este repositorio.
 
