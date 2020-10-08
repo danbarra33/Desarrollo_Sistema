@@ -5,6 +5,7 @@ Este es el proyecto web del sistema de vales
 ## Prerequisitos
 
 1.- Instalar PHP
+
 2.- Instalar [Composer](https://getcomposer.org/).
 
 ## Instalción
