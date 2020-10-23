@@ -7,7 +7,7 @@ Taller integrador
 
 ## Prerequisitos
 
-1. PHP
+1. PHP 7.4
 
 2. [Composer](https://getcomposer.org/).
 
@@ -16,6 +16,8 @@ Taller integrador
     1. Clonar este repositorio.
 
     2. Correr comando en la carpeta: composer update 
+    
+    3. Correr las migraciones (instalar la BD): php artisan migrate
     
 ## Iniciar servidor de desarrollo
 
