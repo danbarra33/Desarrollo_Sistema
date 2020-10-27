@@ -5,11 +5,12 @@
     <div class="col-md-10">
         <div class="card">
         <div class="card-header">
-            <h5 class="title">Añadir Cliente</h5>
+            <h5 class="title">Editar Cliente</h5>
         </div>
         <div class="card-body">
-            <form action="{{url('/clientes/nuevo')}}" method="POST" id="formEnvio">
+            <form action="{{url('/clientes/actualizar')}}" method="POST" id="formEnvio">
             @csrf
+            <input id="id" name="id" type="hidden" value="{{$cliente->iD_Cliente}}">
             <div class="row">
                 <div class="col-md-8 pr-1">
                 <div class="form-group">
@@ -18,7 +19,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Nombre Completo"
-                    value="{{ old('nombre') }}"
+                    value="{{ old('nombre', $cliente->Nombre) }}"
                     name="nombre"
                     />
                 </div>
@@ -30,7 +31,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Telefono"
-                    value="{{ old('telefono') }}"
+                    value="{{ old('telefono', $cliente->Telefono) }}"
                     name="telefono"
                     />
                 </div>
@@ -44,7 +45,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Domicilio"
-                    value="{{ old('domicilio') }}"
+                    value="{{ old('domicilio', $cliente->Direccion) }}"
                     name="domicilio"
                     />
                 </div>
@@ -56,7 +57,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Folio INE"
-                    value="{{ old('folioINE') }}"
+                    value="{{ old('folioINE', $cliente->Folio_INE) }}"
                     name="folioINE"
                     />
                 </div>
@@ -70,7 +71,7 @@
                     type="number"
                     class="form-control"
                     placeholder="Salario"
-                    value="{{ old('Salario') }}"
+                    value="{{ old('Salario', $cliente->Salario_Mensual) }}"
                     name="Salario"
                     />
                 </div>
@@ -82,7 +83,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Status"
-                    value="{{ old('status') }}"
+                    value="{{ old('status', $cliente->Status) }}"
                     name="status"
                     />
                 </div>
@@ -93,7 +94,7 @@
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-success" id="btnRegistrar">
-                Registrar Cliente
+                Actualizar Cliente
                 </button>
             </div>
             </form>

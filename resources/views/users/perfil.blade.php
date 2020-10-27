@@ -11,19 +11,7 @@
                 <div class="card-body">
                   <form>
                     <div class="row">
-                      <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                          <label>ID Cliente</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="ID"
-                            value="ID X"
-                            readonly
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-4 pr-1">
+                      <div class="col-md-8 pr-1">
                         <div class="form-group">
                           <label for="exampleInputEmail1"
                             >Correo Electronico</label
@@ -87,7 +75,7 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                       <button type="button" class="btn btn-success">
-                        Modificar Usuario
+                        Guardar
                       </button>
                     </div>
                   </form>
@@ -98,17 +86,17 @@
             <div class="col-md-3 justify-content-center">
               <div class="card card-user">
                 <div class="image">
-                  <img src="../assets/img/bg5.jpg" alt="..." />
+                  <img src="{{url('/img/bg6.jpg')}}" alt="Background" />
                 </div>
                 <div class="card-body">
                   <div class="author">
                     <a href="#">
                       <img
                         class="avatar border-gray"
-                        src="../assets/img/mike.jpg"
-                        alt="..."
+                        src="{{url('/img/user.png')}}"
+                        alt="Foto"
                       />
-                      <h5 class="title">Mike Contreras</h5>
+                      <h5 class="title">Miguel Contreras</h5>
                     </a>
                     <p class="Status">Cliente Morozo</p>
                   </div>

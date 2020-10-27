@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ClientesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,18 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/clientes', function () {
-    return view('clients.listado');
-})->name('clientesListado');
+Route::get('/clientes', [ClientesController::class, 'listado'])->name('clientesListado')->middleware('auth');
+
+Route::post('/clientes/nuevo', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
+Route::get('/clientes/editar', [ClientesController::class, 'editar'])->name('clientesEditar')->middleware('auth');
+Route::post('/clientes/actualizar', [ClientesController::class, 'actualizar'])->name('clientesActualizar')->middleware('auth');
 
 Route::get('/clientes/agregar', function () {
     return view('clients.agregar');
-})->name('clientesAgregar');
+})->name('clientesAgregar')->middleware('auth');
 
 Route::get('/users/perfil', function () {
     return view('users.perfil');
-});
+})->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
