@@ -132,8 +132,7 @@ CREATE TABLE `users` (
 -- Indices de la tabla `avales`
 --
 ALTER TABLE `avales`
-  ADD PRIMARY KEY (`iD_Aval`),
-  ADD KEY `AvaltoCliente_FK` (`iD_Cliente`);
+  ADD PRIMARY KEY (`iD_Aval`);
 
 --
 -- Indices de la tabla `clientes`
@@ -163,8 +162,7 @@ ALTER TABLE `password_resets`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `us_em_un` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas

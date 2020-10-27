@@ -9,8 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/welcome/carousel.css') }}" />
+        <link rel="stylesheet" href="{{ url('css/app.css') }}" />
+        <link rel="stylesheet" href="{{ url('css/welcome/carousel.css') }}" />
 
 
     </head>
@@ -219,6 +219,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
-  <script src="{{ asset('js/welcome/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url('js/welcome/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
