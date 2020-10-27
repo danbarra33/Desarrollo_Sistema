@@ -18,12 +18,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="../assets/img/apple-icon.png"
-    />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>CRÉDITOS Y VALES DEL NOROESTE</title>
     <meta
@@ -156,7 +150,7 @@
     <script src="{{url('/js/core/popper.min.js')}}"></script>
     <script src="{{url('/js/core/bootstrap.min.js')}}"></script>
     <script src="{{url('/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
-    <script src="http://bootstrap-notify.remabledesigns.com/js/bootstrap-notify.min.js"></script>
+    <script src="{{url('/js/notify.js')}}"></script>
 
     <!--  Google Maps Plugin    -->
  
