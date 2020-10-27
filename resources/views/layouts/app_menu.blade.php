@@ -70,7 +70,7 @@
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'clientes') !== false ? 'active' : ''}}">
               <a href="{{url('/clientes')}}">
                 <i class="fas fa-users"></i>
-                <p>Clienes</p>
+                <p>Clientes</p>
               </a>
             </li>
             <li>
