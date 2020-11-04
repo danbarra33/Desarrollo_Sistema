@@ -34,3 +34,7 @@ Route::get('/users/perfil', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/sucursales', [App\Http\Controllers\SucursalesController::class, 'index'])->name('sucursales')->middleware('auth');
+
+Route::get('/sucursales/listado', [App\Http\Controllers\SucursalesController::class, 'listado'])->name('listadoSucursales')->middleware('auth');

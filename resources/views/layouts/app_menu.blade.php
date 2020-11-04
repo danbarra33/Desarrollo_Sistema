@@ -40,6 +40,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="{{url('/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+    @if(env('APP_DEBUG') == true)
+      <!-- development version, includes helpful console warnings -->
+      <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    @else
+      <!-- production version, optimized for size and speed -->
+      <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    @endif
+
   </head>
 
   <body class="">
@@ -121,7 +130,7 @@
         </nav>
         <!-- End Navbar -->
         <div class="panel-header panel-header-sm"></div>
-        <div class="content" id="{{url('/client')}}">
+        <div class="content">
           @yield('content')
         </div>
         <footer class="footer">
@@ -160,14 +169,6 @@
     <script src="{{url('/client')}}"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{url('/js/now-ui-dashboard.min.js?v=1.5.0')}}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-    
-    @if(env('APP_DEBUG') == true)
-      <!-- development version, includes helpful console warnings -->
-      <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    @else
-      <!-- production version, optimized for size and speed -->
-      <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    @endif
 
 
   </body>
