@@ -110,5 +110,13 @@ class SucursalesController extends Controller
         Session::flash('alert-type', 'info');
         return redirect('/sucursal');
     }
+
+    public function crear(Request $request){
+        return json_encode((object) array(
+            "codigo" => 1,
+            "mensaje" => "Scursal creada correctamente.",
+            "modelo" => null
+        ));
+    }
 }
 
