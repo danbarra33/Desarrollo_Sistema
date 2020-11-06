@@ -34,6 +34,7 @@
                     placeholder="Sucursal"
                     value=""
                     name="nombre"
+                    id="strNombre"
                     />
                 </div>
                 </div>
@@ -47,6 +48,7 @@
                     placeholder="Capital"
                     value=""
                     name="capital"
+                    id="intCapital"
                     />
                 </div>
                 </div>
@@ -62,6 +64,7 @@
                     placeholder="Domicilio"
                     value=""
                     name="direccion"
+                    id="strDomicilio"
                     />
                 </div>
                 </div>

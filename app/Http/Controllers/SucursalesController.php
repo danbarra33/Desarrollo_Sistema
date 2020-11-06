@@ -113,34 +113,26 @@ class SucursalesController extends Controller
 
 
     public function crear(Request $request){
-        return json_encode((object) array(
-            "codigo" => 1,
-            "mensaje" => "Scursal creada correctamente.",
-            "modelo" => null
-        ));
-    }
-
-    public function guardar(Request $request){
         $error=0;
-        if(!isset($request->Capital) || $request->Capital > 0){
+        if(!isset($request->capital)){
             $retorno = (object) array(
-                "codigo" => 1,
+                "codigo" => 0,
                 "mensaje"  => 'Captura el capital',
-                "sucursal" => null
+                "sucursal" => $request
             );
             $error=1;
         }
-        if(strlen($request->Nombre_Empresa) > 50){
+        if(strlen($request->nombre_empresa) > 50){
             $retorno = (object) array(
-                "codigo" => 1,
+                "codigo" => 0,
                 "mensaje"  => 'El nombre debe contener máximo 50 caracteres',
                 "sucursal" => null
             );
             $error=1;
         }
-        if(strlen($request->Direccion) > 50){
+        if(strlen($request->direccion) > 50){
             $retorno = (object) array(
-                "codigo" => 1,
+                "codigo" => 0,
                 "mensaje"  => 'Captura la direccion',
                 "sucursal" => null
             );
@@ -150,15 +142,15 @@ class SucursalesController extends Controller
             return json_encode($retorno);
         }else{
             $sucursal = new Sucursal();
-            $sucursal->Salario_Mensual = (float) trim($request->Capital);
-            $sucursal->Nombre = $request->nombre;
-            $sucursal->Direccion = $request->Direccion;
+            $sucursal->capital = (float) trim($request->capital);
+            $sucursal->nombre_empresa = $request->nombre_empresa;
+            $sucursal->direccion = $request->direccion;
             
             $sucursal->save();
             
             $retorno = (object) array(
                 "codigo" => 1,
-                "mensaje"  => 'Captura la direccion',
+                "mensaje"  => 'Se guardo el registro',
                 "sucursal" => $sucursal
             );
             return json_encode($retorno);

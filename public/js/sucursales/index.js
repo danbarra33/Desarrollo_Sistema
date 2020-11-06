@@ -44,7 +44,12 @@ var app = new Vue({
 
         },
         guardarNuevaSucursal: function (){
-            axios.get(urlCrear)
+            let data = {
+                capital: $('#intCapital').val(),
+                nombre_empresa: $('#strNombre').val(),
+                direccion: $('#strDomicilio').val()
+              };
+            axios.post(urlCrear,data)
             .then(response => {
                 if(response.data.codigo == 1){
                     $.notify({

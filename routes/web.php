@@ -39,10 +39,8 @@ Route::get('/sucursales', [App\Http\Controllers\SucursalesController::class, 'in
 
 Route::get('/sucursales/listado', [App\Http\Controllers\SucursalesController::class, 'listado'])->name('listadoSucursales')->middleware('auth');
 
-Route::get('/sucursales/crear', [App\Http\Controllers\SucursalesController::class, 'crear'])->name('crearSucursal')->middleware('auth');
+Route::post('/sucursales/crear', [App\Http\Controllers\SucursalesController::class, 'crear'])->name('crearSucursal')->middleware('auth');
 
 Route::get('/sucursales/agregar', function () {
     return view('sucursales.agregar');
 })->name('sucursalesAgregar')->middleware('auth');
-
-Route::post('/sucursales/guardar', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
