@@ -111,12 +111,58 @@ class SucursalesController extends Controller
         return redirect('/sucursal');
     }
 
+
     public function crear(Request $request){
         return json_encode((object) array(
             "codigo" => 1,
             "mensaje" => "Scursal creada correctamente.",
             "modelo" => null
         ));
+    }
+
+    public function guardar(Request $request){
+        $error=0;
+        if(!isset($request->Capital) || $request->Capital > 0){
+            $retorno = (object) array(
+                "codigo" => 1,
+                "mensaje"  => 'Captura el capital',
+                "sucursal" => null
+            );
+            $error=1;
+        }
+        if(strlen($request->Nombre_Empresa) > 50){
+            $retorno = (object) array(
+                "codigo" => 1,
+                "mensaje"  => 'El nombre debe contener máximo 50 caracteres',
+                "sucursal" => null
+            );
+            $error=1;
+        }
+        if(strlen($request->Direccion) > 50){
+            $retorno = (object) array(
+                "codigo" => 1,
+                "mensaje"  => 'Captura la direccion',
+                "sucursal" => null
+            );
+            $error=1;
+        }
+        if($error==1){
+            return json_encode($retorno);
+        }else{
+            $sucursal = new Sucursal();
+            $sucursal->Salario_Mensual = (float) trim($request->Capital);
+            $sucursal->Nombre = $request->nombre;
+            $sucursal->Direccion = $request->Direccion;
+            
+            $sucursal->save();
+            
+            $retorno = (object) array(
+                "codigo" => 1,
+                "mensaje"  => 'Captura la direccion',
+                "sucursal" => $sucursal
+            );
+            return json_encode($retorno);
+        }
     }
 }
 
