@@ -6,6 +6,9 @@
   background-color: #86CFAD;
   cursor: pointer;
 }
+.data-notify { 
+  z-index: 9999 !important; 
+}
 </style>
 <div id="app">
 
@@ -28,7 +31,7 @@
                 <div class="form-group">
                     <label>Sucursal</label>
                     <input
-                    v-model = "modelo.nombre"
+                    v-model = "modelo.nombre_empresa"
                     type="text"
                     class="form-control"
                     placeholder="Sucursal"
@@ -74,12 +77,16 @@
                 <button data-dismiss="modal" class="btn btn-secondary" href="" id="btnCancelar">
                     Cancelar
                 </button>
-                <button v-if="modelo.id_sucursal > 0" type="button" class="btn btn-success" id="btnRegistrar">
-                  Actualizar Sucursal
+                <button v-if="modelo.id_sucursal > 0" type="button" class="btn btn-success" :disabled="guardando"
+                id="btnRegistrar" @click="actualizarSucursal()">
+                  <template v-if="guardando"><i  class="fas fa-spinner fa-spin"></i> Guardando</template>
+                  <template v-else> Actualizar Sucursal</template>
                 </button>
                 </button>
-                <button v-else type="button" class="btn btn-success" id="btnRegistrar" @click="guardarNuevaSucursal()" >
-                  Crear Sucursal
+                <button v-else type="button" class="btn btn-success" id="btnRegistrar" :disabled="guardando"
+                  @click="guardarNuevaSucursal()" >
+                  <template v-if="guardando"><i  class="fas fa-spinner fa-spin"></i> Guardando</template>
+                  <template v-else> Crear Sucursal</template>
                 </button>
             </div>
       </div>
@@ -103,7 +110,7 @@
               <th>Direccion</th>
             </thead>
             <tbody>
-                <tr v-for="sucursal in listado">
+                <tr class="fila" v-for="(sucursal, index) in listado" @click="editarSucursal(index)">
                     <td><?php echo "{{sucursal.id_sucursal}}" ?></td>
                     <td><?php echo "{{sucursal.capital}}" ?></td>
                     <td><?php echo "{{sucursal.nombre_empresa}}" ?></td>
@@ -120,6 +127,7 @@
 <script>
     var urlListado = '{{url('/sucursales/listado')}}';
     var urlCrear = '{{url('/sucursales/crear')}}';
+    var urlActualizar = '{{url('/sucursales/actualizar')}}';
 </script>
 <script src="{{url('/js/sucursales/index.js')}}"></script>
 @endsection

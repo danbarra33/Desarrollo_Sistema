@@ -23,92 +23,76 @@ class SucursalesController extends Controller
         ));
     }
 
-    public function editar(Request $request){
-
-        $retorno = (object) array(
-            "codigo" => 0,
-            "mensaje" => "mensaje",
-            "modelo" => null
-        );
-
-        if(!isset($request->id)){
-            $retorno->mensaje = "Proporcione el id de la sucursal.";
-            return json_encode($retorno);
-        }
-        $sucursal = Sucursal::where('ID_Sucursal', $request->id)->first();
-        if(!isset($sucursal)){
-            $retorno->mensaje = "Proporcione el id de la sucursal.";
-            return json_encode($retorno);
-        }
-        
-        $retorno->modelo = $sucursal;
-        return json_encode($retorno);
-    }
-
     public function actualizar(Request $request){
-        if(!isset($request->nombre) || strlen($request->nombre) == 0){
+        $retorno = null;
+        if(!isset($request->nombre_empresa) || strlen($request->nombre_empresa) == 0){
             $retorno = (object) array(
                 "codigo" => 0,
                 "mensaje" => "Captura el nombre",
-                "modelo" => null
+                "sucursal" => null
             );
         }
-        if(strlen(trim($request->nombre)) > 45){
+        if(strlen(trim($request->nombre_empresa)) > 50){
             $retorno = (object) array(
                 "codigo" => 0,
-                "mensaje" => "El contenido debe tener maximo 45 caracteres",
-                "modelo" => null
+                "mensaje" => "El contenido debe tener maximo 50 caracteres",
+                "sucursal" => null
             );
         }
 
         if(!isset($request->direccion) || strlen($request->direccion) == 0){
             $retorno = (object) array(
                 "codigo" => 0,
-                "mensaje" => "Captura el domicilio",
-                "modelo" => null
+                "mensaje" => "Captura el direccion",
+                "sucursal" => null
             );
         }
-        if(strlen(trim($request->domicilio)) > 50){
+        if(strlen(trim($request->direccion)) > 50){
             $retorno = (object) array(
                 "codigo" => 0,
-                "mensaje" => "El domicilio debe tener maximo 50 caracteres",
-                "modelo" => null
+                "mensaje" => "El direccion debe tener maximo 50 caracteres",
+                "sucursal" => null
             );
         }
         if(!isset($request->capital) || strlen($request->capital) <= 0){
             $retorno = (object) array(
                 "codigo" => 0,
                 "mensaje" => "Ingrese el Capital",
-                "modelo" => null
+                "sucursal" => null
             );
         }
         
-        if(!isset($request->id) || strlen($request->id) == 0){
+        if(!isset($request->id_sucursal) || strlen($request->id_sucursal) == 0){
             $retorno = (object) array(
                 "codigo" => 0,
                 "mensaje" => "Debe ingresar el ID de la Sucursal",
-                "modelo" => null
+                "sucursal" => null
             );
         }
 
-        $cliente = Cliente::where('ID_Sucursal', $request->id)->first();
+        $sucursal = Sucursal::where('id_sucursal', $request->id_sucursal)->first();
         if(!isset($sucursal)){
             $retorno = (object) array(
                 "codigo" => 0,
                 "mensaje" => "La sucursal no existe",
-                "modelo" => null
+                "sucursal" => null
             );
         }
+        if(isset($retorno)){
+            return json_encode($retorno);
+        }
 
-        $sucursal->Nombre_Empresa = trim($request->nombre);
-        $sucursal->Capital = trim($request->capital);
-        $sucursal->Direccion = trim($request->domicilio);
-        $sucursal->Telefono = trim($request->telefono);
+        $sucursal->nombre_empresa = trim($request->nombre_empresa);
+        $sucursal->capital = trim($request->capital);
+        $sucursal->direccion = trim($request->direccion);
+        //$sucursal->telefono = trim($request->telefono);
         $sucursal->save();
 
-        Session::flash('message', 'Sucursal actualizadz correctamente.'); 
-        Session::flash('alert-type', 'info');
-        return redirect('/sucursal');
+        return json_encode((object) array(
+            "codigo" => 1,
+            "mensaje" => "Sucursal actualizada correctamente.",
+            "sucursal" => $sucursal
+        ));
     }
 
 
@@ -143,8 +127,8 @@ class SucursalesController extends Controller
         }else{
             $sucursal = new Sucursal();
             $sucursal->capital = (float) trim($request->capital);
-            $sucursal->nombre_empresa = $request->nombre_empresa;
-            $sucursal->direccion = $request->direccion;
+            $sucursal->nombre_empresa = trim($request->nombre_empresa);
+            $sucursal->direccion = trim($request->direccion);
             
             $sucursal->save();
             
