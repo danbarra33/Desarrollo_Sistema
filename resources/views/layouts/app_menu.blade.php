@@ -76,6 +76,12 @@
                 <p>Clientes</p>
               </a>
             </li>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'sucursales') !== false ? 'active' : ''}}">
+              <a href="{{url('/sucursales')}}">
+                <i class="fas fa-hotel"></i>
+                <p>Sucursales</p>
+              </a>
+            </li>
             <li>
               <a href="{{url('/notifications')}}">
                 <i class="fas fa-bell"></i>
