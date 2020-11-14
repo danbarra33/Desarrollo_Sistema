@@ -28,14 +28,14 @@
             </thead>
             <tbody>
               @foreach ($clientes as $cliente)
-              <tr class="fila" data-id="{{$cliente->iD_Cliente}}" title="Click para editar">
-                <td>{{$cliente->iD_Cliente}}</td>
-                <td>{{$cliente->Nombre}}</td>
-                <td>{{$cliente->Folio_INE}}</td>
-                <td>{{$cliente->Direccion}}</td>
-                <td>{{$cliente->Telefono}}</td>
-                <td>{{$cliente->Status == "A" ? "Activo" : "Inactivo"}}</td>
-                <td>$ {{$cliente->Salario_Mensual}}</td>
+              <tr class="fila" data-id="{{$cliente->id_cliente}}" title="Click para editar">
+                <td>{{$cliente->id_cliente}}</td>
+                <td>{{$cliente->nombre}}</td>
+                <td>{{$cliente->folio_ine}}</td>
+                <td>{{$cliente->direccion}}</td>
+                <td>{{$cliente->telefono}}</td>
+                <td>{{$cliente->status == "A" ? "Activo" : "Inactivo"}}</td>
+                <td>$ {{$cliente->salario_mensual}}</td>
               </tr>
               @endforeach
             </tbody>

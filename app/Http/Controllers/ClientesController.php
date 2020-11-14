@@ -20,7 +20,7 @@ class ClientesController extends Controller
             Session::flash('alert-type', 'warning');
             return back()->withInput();
         }
-        $cliente = Cliente::where('iD_Cliente', $request->id)->first();
+        $cliente = Cliente::where('id_cliente', $request->id)->first();
         if(!isset($cliente)){
             Session::flash('message', 'El cliente no existe'); 
             Session::flash('alert-type', 'warning');
@@ -101,12 +101,12 @@ class ClientesController extends Controller
             return back()->withInput();
         }
 
-        $cliente->Nombre = trim($request->nombre);
-        $cliente->Folio_INE = trim($request->folioINE);
-        $cliente->Direccion = trim($request->domicilio);
-        $cliente->Telefono = trim($request->telefono);
-        $cliente->Status = trim($request->status);
-        $cliente->Salario_Mensual = (float) trim($request->Salario);
+        $cliente->nombre = trim($request->nombre);
+        $cliente->folio_INE = trim($request->folioINE);
+        $cliente->direccion = trim($request->domicilio);
+        $cliente->telefono = trim($request->telefono);
+        $cliente->status = trim($request->status);
+        $cliente->salario_Mensual = (float) trim($request->Salario);
         $cliente->save();
 
         Session::flash('message', 'Cliente actualizado correctamente.'); 
@@ -174,12 +174,12 @@ class ClientesController extends Controller
         }
         
         $cliente = new Cliente();
-        $cliente->Nombre = trim($request->nombre);
-        $cliente->Folio_INE = trim($request->folioINE);
-        $cliente->Direccion = trim($request->domicilio);
-        $cliente->Telefono = trim($request->telefono);
-        $cliente->Status = trim($request->status);
-        $cliente->Salario_Mensual = (float) trim($request->Salario);
+        $cliente->nombre = trim($request->nombre);
+        $cliente->folio_INE = trim($request->folioINE);
+        $cliente->direccion = trim($request->domicilio);
+        $cliente->telefono = trim($request->telefono);
+        $cliente->status = trim($request->status);
+        $cliente->salario_Mensual = (float) trim($request->Salario);
         $cliente->save();
 
         Session::flash('message', 'Cliente registrado correctamente.'); 

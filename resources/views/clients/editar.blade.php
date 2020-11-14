@@ -10,7 +10,7 @@
         <div class="card-body">
             <form action="{{url('/clientes/actualizar')}}" method="POST" id="formEnvio">
             @csrf
-            <input id="id" name="id" type="hidden" value="{{$cliente->iD_Cliente}}">
+            <input id="id" name="id" type="hidden" value="{{$cliente->id_cliente}}">
             <div class="row">
                 <div class="col-md-8 pr-1">
                 <div class="form-group">
@@ -19,7 +19,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Nombre Completo"
-                    value="{{ old('nombre', $cliente->Nombre) }}"
+                    value="{{ old('nombre', $cliente->nombre) }}"
                     name="nombre"
                     />
                 </div>
@@ -31,7 +31,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Telefono"
-                    value="{{ old('telefono', $cliente->Telefono) }}"
+                    value="{{ old('telefono', $cliente->telefono) }}"
                     name="telefono"
                     />
                 </div>
@@ -45,7 +45,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Domicilio"
-                    value="{{ old('domicilio', $cliente->Direccion) }}"
+                    value="{{ old('domicilio', $cliente->direccion) }}"
                     name="domicilio"
                     />
                 </div>
@@ -57,7 +57,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Folio INE"
-                    value="{{ old('folioINE', $cliente->Folio_INE) }}"
+                    value="{{ old('folioINE', $cliente->folio_ine) }}"
                     name="folioINE"
                     />
                 </div>
@@ -71,7 +71,7 @@
                     type="number"
                     class="form-control"
                     placeholder="Salario"
-                    value="{{ old('Salario', $cliente->Salario_Mensual) }}"
+                    value="{{ old('Salario', $cliente->salario_mensual) }}"
                     name="Salario"
                     />
                 </div>
@@ -83,7 +83,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Status"
-                    value="{{ old('status', $cliente->Status) }}"
+                    value="{{ old('status', $cliente->status) }}"
                     name="status"
                     />
                 </div>
