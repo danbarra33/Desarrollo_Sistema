@@ -82,6 +82,12 @@
                 <p>Sucursales</p>
               </a>
             </li>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'empleados') !== false ? 'active' : ''}}">
+              <a href="{{url('/empleados')}}">
+                <i class="fas fa-people-carry"></i>
+                <p>Empleados</p>
+              </a>
+            </li>
             <li>
               <a href="{{url('/notifications')}}">
                 <i class="fas fa-bell"></i>

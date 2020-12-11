@@ -9,8 +9,6 @@ use App\Models\Sucursal;
 
 class SucursalesController extends Controller
 {
-
-
     public function index(){
         return View::make('sucursales.index');
     }

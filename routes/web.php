@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\SucursalesController;
+use App\Http\Controllers\EmpleadosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,3 +45,10 @@ Route::post('/sucursales/crear', [App\Http\Controllers\SucursalesController::cla
 
 Route::post('/sucursales/actualizar', [App\Http\Controllers\SucursalesController::class, 'actualizar'])->name('actualizarSucursal')->middleware('auth');
 
+Route::get('/empleados', [App\Http\Controllers\EmpleadosController::class, 'index'])->name('empleados')->middleware('auth');
+
+Route::get('/empleados/listado', [App\Http\Controllers\EmpleadosController::class, 'listado'])->name('listadoEmpleados')->middleware('auth');
+
+Route::post('/empleados/crear', [App\Http\Controllers\EmpleadosController::class, 'crear'])->name('crearEmpleado')->middleware('auth');
+
+Route::post('/empleados/actualizar', [App\Http\Controllers\EmpleadosController::class, 'actualizar'])->name('actualizarEmpleado')->middleware('auth');
