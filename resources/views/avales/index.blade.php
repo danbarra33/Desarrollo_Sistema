@@ -14,12 +14,12 @@
 
 <div class="row justify-content-center" id="app">
 
-  <div id="modalEmpleado" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div id="modalAval" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Empleados</h5>
-          <h5 v-else class="modal-title" id="exampleModalLabel">Crear Empleado</h5>
+          <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Avales</h5>
+          <h5 v-else class="modal-title" id="exampleModalLabel">Crear Aval</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -128,15 +128,15 @@
                     Cancelar
                 </button>
                 <button v-if="modelo.id > 0" type="button" class="btn btn-success" :disabled="guardando"
-                id="btnRegistrar" @click="actualizarEmpleado()">
+                id="btnRegistrar" @click="actualizarAval()">
                   <template v-if="guardando"><i  class="fas fa-spinner fa-spin"></i> Guardando</template>
-                  <template v-else> Actualizar Empleado</template>
+                  <template v-else> Actualizar Aval</template>
                 </button>
                 </button>
                 <button v-else type="button" class="btn btn-success" id="btnRegistrar" :disabled="guardando"
-                  @click="guardarNuevoEmpleado()" >
+                  @click="guardarNuevoAval()" >
                   <template v-if="guardando"><i  class="fas fa-spinner fa-spin"></i> Guardando</template>
-                  <template v-else> Añadir Empleado</template>
+                  <template v-else> Añadir Aval</template>
                 </button>
             </div>
       </div>
@@ -146,30 +146,30 @@
   <div class="col-md-10">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Empleado</h4>
-        <button @click="crearEmpleado()" title="Agregar Empleado" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
+        <h4 class="card-title">Avales</h4>
+        <button @click="crearAval()" title="Agregar Aval" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
       </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table">
         <thead class="text-primary">
-          <th>ID Empleado</th>
-          <th>Nombre Completo</th>
-          <th>Domicilio</th>
+          <th>ID Aval</th>
+          <th>Folio INE</th>
+          <th>Direccion</th>
           <th>Telefono</th>
-          <th>Correo Electronico</th>
-          <th>Sucursal</th>
-          <th>Tipo de Usuario</th>
+          <th>RFC</th>
+          <th>ID Cliente</th>
+          <th>CURP</th>
         </thead>
         <tbody>
-            <tr class="fila" v-for="(empleado, index) in listado" @click="editarEmpleado(index)">
-                <td><?php echo "{{empleado.id}}" ?></td>
-                <td><?php echo "{{empleado.name}}" ?></td>
-                <td><?php echo "{{empleado.address}}" ?></td>
-                <td><?php echo "{{empleado.phone}}" ?></td>
-                <td><?php echo "{{empleado.email}}" ?></td>
-                <td><?php echo "{{empleado.id_sucursal}}" ?></td>
-                <td><?php echo "{{empleado.type_of_user}}" ?></td>
+            <tr class="fila" v-for="(aval, index) in listado" @click="editarAval(index)">
+                <td><?php echo "{{aval.id_aval}}" ?></td>
+                <td><?php echo "{{aval.folio_ine}}" ?></td>
+                <td><?php echo "{{aval.direccion}}" ?></td>
+                <td><?php echo "{{aval.telefono}}" ?></td>
+                <td><?php echo "{{aval.rfc}}" ?></td>
+                <td><?php echo "{{aval.id_cliente}}" ?></td>
+                <td><?php echo "{{aval.curp}}" ?></td>
             </tr>
         </tbody>
       </table>
@@ -180,9 +180,9 @@
 </div>
 </div>
 <script>
-var urlListado = '{{url('/empleados/listado')}}';
-var urlCrear = '{{url('/empleados/crear')}}';
-var urlActualizar = '{{url('/empleados/actualizar')}}';
+var urlListado = '{{url('/avales/listado')}}';
+var urlCrear = '{{url('/avales/crear')}}';
+var urlActualizar = '{{url('/avales/actualizar')}}';
 </script>
-<script src="{{url('/js/empleados/index.js')}}"></script>
+<script src="{{url('/js/avales/index.js')}}"></script>
 @endsection

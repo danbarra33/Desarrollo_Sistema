@@ -88,6 +88,12 @@
                 <p>Empleados</p>
               </a>
             </li>
+             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'avales') !== false ? 'active' : ''}}">
+              <a href="{{url('/avales')}}">
+                <i class="fas fa-piggy-bank"></i>
+                <p>Avales</p>
+              </a>
+            </li>
             <li>
               <a href="{{url('/notifications')}}">
                 <i class="fas fa-bell"></i>

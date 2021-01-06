@@ -52,3 +52,7 @@ Route::get('/empleados/listado', [App\Http\Controllers\EmpleadosController::clas
 Route::post('/empleados/crear', [App\Http\Controllers\EmpleadosController::class, 'crear'])->name('crearEmpleado')->middleware('auth');
 
 Route::post('/empleados/actualizar', [App\Http\Controllers\EmpleadosController::class, 'actualizar'])->name('actualizarEmpleado')->middleware('auth');
+
+Route::get('/avales', [App\Http\Controllers\AvalesController::class, 'index'])->name('avales')->middleware('auth');
+
+Route::get('/avales/listado', [App\Http\Controllers\AvalesController::class, 'listado'])->name('listadoAvales')->middleware('auth');
