@@ -94,12 +94,13 @@
                 <p>Avales</p>
               </a>
             </li>
-            <li>
+            <!--<li>
               <a href="{{url('/notifications')}}">
                 <i class="fas fa-bell"></i>
                 <p>Notificaciones</p>
               </a>
             </li>
+          -->
           </ul>
         </div>
       </div>

@@ -93,7 +93,7 @@ class AvalesController extends Controller
         ));
     }
 
-
+*/
     public function crear(Request $request){
         $error=0;
         if(!isset($request->capital)){
@@ -139,6 +139,5 @@ class AvalesController extends Controller
         }
 
     }
-    */
 }
 
