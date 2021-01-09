@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\SucursalesController;
 use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\TiposPagosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,9 @@ Route::get('/', function () {
 });
 
 Route::get('/clientes', [ClientesController::class, 'listado'])->name('clientesListado')->middleware('auth');
+
+Route::get('/pagos/tipos/listado', [TiposPagosController::class, 'listado'])->name('tiposPagos')->middleware('auth');
+Route::get('/pagos/tipos', [TiposPagosController::class, 'index'])->name('indexTiposPagos')->middleware('auth');
 
 Route::post('/clientes/nuevo', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
 Route::get('/clientes/editar', [ClientesController::class, 'editar'])->name('clientesEditar')->middleware('auth');
@@ -57,6 +61,6 @@ Route::get('/avales', [App\Http\Controllers\AvalesController::class, 'index'])->
 
 Route::get('/avales/listado', [App\Http\Controllers\AvalesController::class, 'listado'])->name('listadoAvales')->middleware('auth');
 
-Route::post('/avales/crear', [App\Http\Controllers\AvalesController::class, 'crear'])->name('crearAval')->middleware('auth');
+Route::post('/avales/crear', [App\Http\Controllers\AvalesController::class, 'crear'])->name('crearAval');//->middleware('auth');
 
 Route::get('/clientes/descargar', [App\Http\Controllers\ClientesController::class, 'descargar'])->name('descargarCliente')->middleware('auth');

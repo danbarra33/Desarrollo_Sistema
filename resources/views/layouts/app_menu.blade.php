@@ -94,6 +94,13 @@
                 <p>Avales</p>
               </a>
             </li>
+            <meta charset="utf-8" />
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'indexTiposPagos') !== false ? 'active' : ''}}">
+              <a href="{{url('/pagos/tipos')}}">
+                <i class="fas fa-comment-dollar"></i>
+                <p>Métodos de Pago</p>
+              </a>
+            </li>
             <!--<li>
               <a href="{{url('/notifications')}}">
                 <i class="fas fa-bell"></i>

@@ -50,14 +50,14 @@
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>CURP</label>
-                                <input v-model="modelo.CURP" type="text" class="form-control" placeholder="CURP"
+                                <input v-model="modelo.curp" type="text" class="form-control" placeholder="CURP"
                                     value="" name="curp" id="strCurp" />
                             </div>
                         </div>
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>RFC</label>
-                                <input v-model="modelo.RFC" type="text" class="form-control" placeholder="RFC" value=""
+                                <input v-model="modelo.rfc" type="text" class="form-control" placeholder="RFC" value=""
                                     name="rfc" id="strRfc" />
                             </div>
                         </div>
@@ -66,14 +66,14 @@
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>Folio INE</label>
-                                <input v-model="modelo.Folio" type="text" class="form-control" placeholder="Folio INE"
+                                <input v-model="modelo.folio_ine" type="text" class="form-control" placeholder="Folio INE"
                                     value="" name="folio" id="strFolio" />
                             </div>
                         </div>
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>Telefono</label>
-                                <input v-model="modelo.Telefono" type="text" class="form-control" placeholder="Telefono"
+                                <input v-model="modelo.telefono" type="text" class="form-control" placeholder="Telefono"
                                     value="" name="telefono" id="strTelefono" />
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                         <div class="col-md-10 pr-1">
                             <div class="form-group">
                                 <label>Dirección</label>
-                                <input v-model="modelo.Direccion" type="text" class="form-control"
+                                <input v-model="modelo.direccion" type="text" class="form-control"
                                     placeholder="Dirección" value="" name="direccion" id="strDireccion" />
                             </div>
                         </div>
@@ -155,8 +155,10 @@
 </script>
 <script>
     var urlListado = '{{ url('/avales/listado') }}';
-    var urlCrear = '{{ url('/avales/agregar') }}';
+    var urlCrear = '{{ url('/avales/crear') }}';
     var urlActualizar = '{{ url('/avales/actualizar') }}';
+
+    console.log('{{csrf_token()}}');
 
 </script>
 <script src="{{ url('/js/avales/index.js') }}"></script>

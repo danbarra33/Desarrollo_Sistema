@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BuroCredito;
 
 class BuroCreditoController extends Controller{
     public function listado(Request $request){
