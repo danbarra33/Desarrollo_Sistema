@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\View;
 use Session;
+use Illuminate\Support\Facades\Storage;
 
 class ClientesController extends Controller
 {
@@ -30,9 +31,76 @@ class ClientesController extends Controller
         return View::make('clients.editar', compact(['cliente']));
     }
 
+    public function descargar(Request $request){
+        try {
+            //http://localhost/Desarrollo_Sistema/public/clientes/descargar?id_cliente=1&documento=INE
+            //header('Content-Disposition: filename="documento_'.$request->documento.'.pdf"');
+
+            $cliente = Cliente::where('id_cliente', $request->id_cliente)->first();
+            if(!isset($cliente)){
+                abort(404);
+            }
+
+            $fileName = null;
+            
+            switch ($request->documento) {
+                case 'INE':
+                    $fileName = "Identificacion de {$cliente->nombre}.pdf";
+                    break;
+                case 'ComprobanteIngresos':
+                    $fileName = "Comprobante de Ingresos de {$cliente->nombre}.pdf";
+                    break;
+                case 'Domicilio':
+                    $fileName = "Comprobante de domicilio de {$cliente->nombre}.pdf";
+                    break;
+                default:
+                    $fileName = "documento_{$request->documento}.pdf";
+                    break;
+            }
+
+            return Storage::download("local/documentos/{$request->id_cliente}/{$request->documento}.pdf", $fileName);
+        } catch (\Throwable $th) {
+            abort(404);
+        }
+    }
+
     public function actualizar(Request $request){
 
-        $retorno = null;
+        if(!isset($request->id) || strlen($request->id) == 0){
+            Session::flash('message', 'Debe proporcionar el id del cliente'); 
+            Session::flash('alert-type', 'warning');
+            return back()->withInput();
+        }
+
+        $cliente = Cliente::where('id_cliente', $request->id)->first();
+        if(!isset($cliente)){
+            Session::flash('message', 'El cliente debe proporcionado no existe'); 
+            Session::flash('alert-type', 'warning');
+            return back()->withInput();
+        }
+
+        if ($request->hasFile('INE')) {
+            //local/documentos/1/INE.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('INE'), "documentos/{$cliente->id_cliente}/INE.pdf"
+            );
+        }
+
+        if ($request->hasFile('ComprobanteIngresos')) {
+            //local/documentos/1/ComprobanteIngresos.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('ComprobanteIngresos'), "documentos/{$cliente->id_cliente}/ComprobanteIngresos.pdf"
+            );
+        }
+
+        if ($request->hasFile('Domicilio')) {
+            //local/documentos/1/Domicilio.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('Domicilio'), "documentos/{$cliente->id_cliente}/Domicilio.pdf"
+            );
+        }
+        
+
         if(!isset($request->nombre) || strlen($request->nombre) == 0){
             $retorno = (object) array(
                 "codigo" => 0,
@@ -141,13 +209,9 @@ class ClientesController extends Controller
         $cliente->salario_Mensual = (float) trim($request->Salario);
         $cliente->save();
 
-        return json_encode((object) array(
-            "codigo" => 1,
-            "mensaje" => "cliente actualizado correctamente.",
-            "cliente" => $cliente
-        ));
-
-       
+        Session::flash('message', 'Cliente actualizado correctamente.'); 
+        Session::flash('alert-type', 'info');
+        return redirect('/clientes');
     }
 
     public function nuevo(Request $request){
@@ -208,6 +272,24 @@ class ClientesController extends Controller
             Session::flash('alert-type', 'warning');
             return back()->withInput();
         }
+
+        if (!$request->hasFile('INE')) {
+            Session::flash('message', 'Debe proporcionar la identificación personal'); 
+            Session::flash('alert-type', 'warning');
+            return back()->withInput();
+        }
+
+        if (!$request->hasFile('ComprobanteIngresos')) {
+            Session::flash('message', 'Debe proporcionar el comprobante de ingresos');
+            Session::flash('alert-type', 'warning');
+            return back()->withInput();
+        }
+
+        if (!$request->hasFile('Domicilio')) {
+            Session::flash('message', 'Debe proporcionar el comprobante de domicilio');
+            Session::flash('alert-type', 'warning');
+            return back()->withInput();
+        }
         
         $cliente = new Cliente();
         $cliente->nombre = trim($request->nombre);
@@ -217,6 +299,27 @@ class ClientesController extends Controller
         $cliente->status = trim($request->status);
         $cliente->salario_Mensual = (float) trim($request->Salario);
         $cliente->save();
+
+        if ($request->hasFile('INE')) {
+            //local/documentos/1/INE.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('INE'), "documentos/{$cliente->id_cliente}/INE.pdf"
+            );
+        }
+
+        if ($request->hasFile('ComprobanteIngresos')) {
+            //local/documentos/1/ComprobanteIngresos.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('ComprobanteIngresos'), "documentos/{$cliente->id_cliente}/ComprobanteIngresos.pdf"
+            );
+        }
+
+        if ($request->hasFile('Domicilio')) {
+            //local/documentos/1/Domicilio.pdf
+            $pathINE = Storage::putFileAs(
+                'local', $request->file('Domicilio'), "documentos/{$cliente->id_cliente}/Domicilio.pdf"
+            );
+        }
 
         Session::flash('message', 'Cliente registrado correctamente.'); 
         Session::flash('alert-type', 'info');
