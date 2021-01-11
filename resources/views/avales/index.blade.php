@@ -12,7 +12,7 @@
     }
 
 </style>
-<div id="app">
+<div id="app"> 
 
     <div class="row justify-content-center" id="app">
 
@@ -163,3 +163,14 @@
 </script>
 <script src="{{ url('/js/avales/index.js') }}"></script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
