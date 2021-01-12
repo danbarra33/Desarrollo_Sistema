@@ -22,6 +22,9 @@ Route::get('/', function () {
 
 Route::get('/clientes', [ClientesController::class, 'listado'])->name('clientesListado')->middleware('auth');
 
+Route::post('/pagos/tipos/actualizar', [TiposPagosController::class, 'actualizar'])->name('actualizarTiposPagos')->middleware('auth');
+Route::post('/pagos/tipos/crear', [TiposPagosController::class, 'nuevo'])->name('crearTiposPagos')->middleware('auth');
+Route::post('/pagos/tipos/borrar', [TiposPagosController::class, 'borrar'])->name('borrarTiposPagos')->middleware('auth');
 Route::get('/pagos/tipos/listado', [TiposPagosController::class, 'listado'])->name('tiposPagos')->middleware('auth');
 Route::get('/pagos/tipos', [TiposPagosController::class, 'index'])->name('indexTiposPagos')->middleware('auth');
 
