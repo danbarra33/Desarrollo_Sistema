@@ -18,14 +18,14 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">Agregar método de pago</h5>
+              <h5 class="modal-title" id="myModalLabel">Nuevo método</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="FormMetodoPago">Nuevo método de pago:</label>
+                <label for="FormMetodoPago">Nombre del método de pago:</label>
                 <textarea class="form-control" id="FormMetodoPago" rows="1" placeholder="Método de pago"></textarea>
               </div>
 
