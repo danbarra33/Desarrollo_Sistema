@@ -69,17 +69,35 @@
                 <i class="fas fa-box"></i>
                 <p>Dashboard</p>
               </a>
-            </li>         
+            </li>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'prestamos') !== false ? 'active' : ''}}">
+              <a href="{{url('/prestamos')}}">
+              <i class="fas fa-hand-holding-usd"></i>
+                <p>Prestamos</p>
+              </a>
+            </li>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'pago') !== false ? 'active' : ''}}">
+              <a href="{{url('/pagos/tipos')}}">
+              <i class="fas fa-donate"></i>
+                <p>Pagos</p>
+              </a>
+            </li>      
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'clientes') !== false ? 'active' : ''}}">
               <a href="{{url('/clientes')}}">
                 <i class="fas fa-users"></i>
                 <p>Clientes</p>
               </a>
             </li>
-            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'sucursales') !== false ? 'active' : ''}}">
-              <a href="{{url('/sucursales')}}">
-                <i class="fas fa-hotel"></i>
-                <p>Sucursales</p>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'buro') !== false ? 'active' : ''}}">
+              <a href="{{url('/pagos/tipos')}}">
+              <i class="far fa-credit-card"></i>
+                <p>Buró de crédito</p>
+              </a>
+            </li>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'avales') !== false ? 'active' : ''}}">
+              <a href="{{url('/avales')}}">
+                <i class="fas fa-piggy-bank"></i>
+                <p>Avales</p>
               </a>
             </li>
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'empleados') !== false ? 'active' : ''}}">
@@ -88,16 +106,16 @@
                 <p>Empleados</p>
               </a>
             </li>
-             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'avales') !== false ? 'active' : ''}}">
-              <a href="{{url('/avales')}}">
-                <i class="fas fa-piggy-bank"></i>
-                <p>Avales</p>
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'sucursales') !== false ? 'active' : ''}}">
+              <a href="{{url('/sucursales')}}">
+                <i class="fas fa-hotel"></i>
+                <p>Sucursales</p>
               </a>
-            </li>
+            </li>  
             <meta charset="utf-8" />
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'indexTiposPagos') !== false ? 'active' : ''}}">
               <a href="{{url('/pagos/tipos')}}">
-                <i class="fas fa-comment-dollar"></i>
+                <i class="fas fa-money-bill-wave"></i>
                 <p>Métodos de Pago</p>
               </a>
             </li>
