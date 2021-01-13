@@ -1,17 +1,7 @@
 @extends('layouts.app_menu')
 
 @section('content')
-<style>
-    .fila:hover {
-        background-color: #86CFAD;
-        cursor: pointer;
-    }
 
-    .data-notify {
-        z-index: 9999 !important;
-    }
-
-</style>
 <div id="app">
 
     <div class="row justify-content-center" id="app">
@@ -70,9 +60,17 @@
                                 <th>#</th>
                                 <th>cliente</th>
                                 <th>monto</th>
-                                <th>auth</th>
+                                <th>saldo</th>
+                                <th>estatus</th>
                             </thead>
-                            <tbody>
+                            <tbody >
+                            <tr class="fila" v-for="(prestamo, index) in listado">
+                                <td><?php echo "{{prestamo.id_prestamo}}" ?></td>
+                                <td><?php echo "{{prestamo.nombreCliente}}" ?></td>
+                                <td><?php echo "{{prestamo.monto_prestamo}}" ?></td>
+                                <td><?php echo "{{prestamo.saldo}}" ?></td>
+                                <td><?php echo "{{prestamo.status}}" ?></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -82,8 +80,6 @@
     </div>
 </div>
 <script>
-
-    console.log('{{csrf_token()}}');
 
 </script>
 <script src="{{ url('/js/prestamos/index.js') }}"></script>
