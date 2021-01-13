@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\SucursalesController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\TiposPagosController;
+use App\Http\Controllers\PrestamosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,3 +68,5 @@ Route::get('/avales/listado', [App\Http\Controllers\AvalesController::class, 'li
 Route::post('/avales/crear', [App\Http\Controllers\AvalesController::class, 'crear'])->name('crearAval');//->middleware('auth');
 
 Route::get('/clientes/descargar', [App\Http\Controllers\ClientesController::class, 'descargar'])->name('descargarCliente')->middleware('auth');
+
+Route::get('/prestamos', [App\Http\Controllers\PrestamosController::class, 'index'])->name('prestamos')->middleware('auth');

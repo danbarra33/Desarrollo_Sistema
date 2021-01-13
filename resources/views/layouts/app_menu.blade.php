@@ -70,8 +70,8 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'prestamo') !== false ? 'active' : ''}}">
-              <a href="{{url('/pagos/tipos')}}">
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'prestamos') !== false ? 'active' : ''}}">
+              <a href="{{url('/prestamos')}}">
               <i class="fas fa-hand-holding-usd"></i>
                 <p>Prestamos</p>
               </a>
