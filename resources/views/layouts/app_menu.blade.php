@@ -49,6 +49,8 @@
       <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     @endif
 
+    
+
   </head>
 
   <body class="">
@@ -198,6 +200,7 @@
     <script src="{{url('/js/core/bootstrap.min.js')}}"></script>
     <script src="{{url('/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
     <script src="{{url('/js/notify.js')}}"></script>
+
 
     <!--  Google Maps Plugin    -->
  

@@ -325,4 +325,33 @@ class ClientesController extends Controller
         Session::flash('alert-type', 'info');
         return redirect('/clientes');
     }
+
+    public function buscar(Request $request){
+
+        
+        $resultados = Cliente::where('nombre', 'LIKE', '%'.$request->busqueda.'%')
+        ->orWhere('id_cliente', 'LIKE', '%'.$request->busqueda.'%')
+        ->select('id_cliente AS id', \DB::raw("CONCAT(`id_cliente`, ' - ', `nombre`) AS text"))
+        ->paginate(10);
+
+        $totalPaginas = $resultados->total() / $resultados->perPage();
+
+        //return $resultados->currentPage();
+
+        $mas = false;
+        if($resultados->currentPage() < $totalPaginas){
+            $mas = true;
+        }
+
+        $resultados = $resultados->items();
+
+        $retorno = (object) array(
+            "results"=>$resultados,
+            "pagination"=>(object) array(
+                "more" => $mas,
+            )
+        );
+        return json_encode($retorno);
+    }
+
 }
