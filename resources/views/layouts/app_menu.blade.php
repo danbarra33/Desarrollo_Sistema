@@ -76,8 +76,8 @@
                 <p>Prestamos</p>
               </a>
             </li>
-            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'pago') !== false ? 'active' : ''}}">
-              <a href="{{url('/pagos/tipos')}}">
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'pagoslistado') !== false ? 'active' : ''}}">
+              <a href="{{url('/pagos/listado')}}">
               <i class="fas fa-donate"></i>
                 <p>Pagos</p>
               </a>
@@ -119,13 +119,7 @@
                 <p>Métodos de Pago</p>
               </a>
             </li>
-            <!--<li>
-              <a href="{{url('/notifications')}}">
-                <i class="fas fa-bell"></i>
-                <p>Notificaciones</p>
-              </a>
-            </li>
-          -->
+            
           </ul>
         </div>
       </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\SucursalesController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\TiposPagosController;
 use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\PagosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,11 @@ Route::post('/pagos/tipos/crear', [TiposPagosController::class, 'nuevo'])->name(
 Route::post('/pagos/tipos/borrar', [TiposPagosController::class, 'borrar'])->name('borrarTiposPagos')->middleware('auth');
 Route::get('/pagos/tipos/listado', [TiposPagosController::class, 'listado'])->name('tiposPagos')->middleware('auth');
 Route::get('/pagos/tipos', [TiposPagosController::class, 'index'])->name('indexTiposPagos')->middleware('auth');
+
+// ---------------------------------------------------------------------------------------------
+Route::get('/pagos', [PagosController::class, 'index'])->name('Pagos')->middleware('auth');
+//Route::get('/pagos ', [PagosController::class, 'listado'])->name('pagoslistado')->middleware('auth');
+// ---------------------------------------------------------------------------------------------
 
 Route::post('/clientes/nuevo', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
 Route::get('/clientes/editar', [ClientesController::class, 'editar'])->name('clientesEditar')->middleware('auth');
