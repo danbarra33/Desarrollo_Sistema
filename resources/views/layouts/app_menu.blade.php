@@ -76,8 +76,8 @@
                 <p>Prestamos</p>
               </a>
             </li>
-            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'pagoslistado') !== false ? 'active' : ''}}">
-              <a href="{{url('/pagos/listado')}}">
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'PagosIndex') !== false ? 'active' : ''}}">
+              <a href="{{url('/pagos')}}">
               <i class="fas fa-donate"></i>
                 <p>Pagos</p>
               </a>
