@@ -73,7 +73,9 @@ Route::get('/clientes/buscarCliente', [App\Http\Controllers\ClientesController::
 
 Route::get('/avales/listado', [App\Http\Controllers\AvalesController::class, 'listado'])->name('listadoAvales')->middleware('auth');
 
-Route::post('/avales/crear', [App\Http\Controllers\AvalesController::class, 'crear'])->name('crearAval');//->middleware('auth');
+Route::post('/avales/crear', [App\Http\Controllers\AvalesController::class, 'crear'])->name('crearAval')->middleware('auth');
+
+Route::post('/avales/actualizar', [App\Http\Controllers\AvalesController::class, 'actualizar'])->name('actualizarAval')->middleware('auth');
 
 Route::get('/clientes/descargar', [App\Http\Controllers\ClientesController::class, 'descargar'])->name('descargarCliente')->middleware('auth');
 

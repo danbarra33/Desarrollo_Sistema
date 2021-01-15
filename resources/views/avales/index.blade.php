@@ -28,8 +28,21 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Avales</h5>
-                        <h5 v-else class="modal-title" id="exampleModalLabel">Crear Aval</h5>
+
+                        
+
+
+
+                        <h5 v-if="cargando" class="modal-title" id="exampleModalLabel">
+                            &nbsp;&nbsp;Cargando&nbsp;<i  class="fas fa-spinner fa-spin"></i>
+                        </h5>
+                        <h5 v-else class="modal-title" id="exampleModalLabel">
+                            <template v-if="modelo.id_aval > 0" >Editar Aval <?php echo "{{modelo.id_aval}}" ?></template>
+                            <template v-else>Crear Aval</template>
+                        </h5>
+
+                        
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -38,7 +51,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6 pr-1">
                         <label for="selectCliente">Cliente</label>
-                        <select style="width: 100%;" class="select-obj" id="selectCliente" name="selectCliente">
+                        <select :disabled="cargando || modelo.id_aval > 0" placeholder="Seleccione" style="width: 100%;" class="select-obj" id="selectCliente" name="selectCliente">
                         </select>
 
                             <!--
@@ -51,10 +64,21 @@
                         
                         </div>
                         <div class="col-md-4 pr-1">
+                            <!--
                             <div class="form-group">
                                 <label>ID Cliente</label>
                                 <input v-model="modelo.id_cliente" type="text" class="form-control"
                                     placeholder="ID Cliente" value="" name="ID Cliente" id="strID_Cliente" />
+                            </div>-->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 pr-1">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input :disabled="cargando" v-model="modelo.nombre" type="text" class="form-control" placeholder="Nombre"
+                                    value="" name="nombre" id="strNombre" />
                             </div>
                         </div>
                     </div>
@@ -62,14 +86,14 @@
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>CURP</label>
-                                <input v-model="modelo.curp" type="text" class="form-control" placeholder="CURP"
+                                <input :disabled="cargando" v-model="modelo.curp" type="text" class="form-control" placeholder="CURP"
                                     value="" name="curp" id="strCurp" />
                             </div>
                         </div>
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>RFC</label>
-                                <input v-model="modelo.rfc" type="text" class="form-control" placeholder="RFC" value=""
+                                <input :disabled="cargando" v-model="modelo.rfc" type="text" class="form-control" placeholder="RFC" value=""
                                     name="rfc" id="strRfc" />
                             </div>
                         </div>
@@ -78,14 +102,14 @@
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>Folio INE</label>
-                                <input v-model="modelo.folio_ine" type="text" class="form-control" placeholder="Folio INE"
+                                <input :disabled="cargando" v-model="modelo.folio_ine" type="text" class="form-control" placeholder="Folio INE"
                                     value="" name="folio" id="strFolio" />
                             </div>
                         </div>
                         <div class="col-md-5 pr-1">
                             <div class="form-group">
                                 <label>Telefono</label>
-                                <input v-model="modelo.telefono" type="text" class="form-control" placeholder="Telefono"
+                                <input :disabled="cargando" v-model="modelo.telefono" type="text" class="form-control" placeholder="Telefono"
                                     value="" name="telefono" id="strTelefono" />
                             </div>
                         </div>
@@ -94,7 +118,7 @@
                         <div class="col-md-10 pr-1">
                             <div class="form-group">
                                 <label>Dirección</label>
-                                <input v-model="modelo.direccion" type="text" class="form-control"
+                                <input :disabled="cargando" v-model="modelo.direccion" type="text" class="form-control"
                                     placeholder="Dirección" value="" name="direccion" id="strDireccion" />
                             </div>
                         </div>
@@ -103,13 +127,13 @@
                         <button data-dismiss="modal" class="btn btn-secondary" href="" id="btnCancelar">
                             Cancelar
                         </button>
-                        <button v-if="modelo.id > 0" type="button" class="btn btn-success" :disabled="guardando"
+                        <button v-if="modelo.id_aval > 0" type="button" class="btn btn-success" :disabled="guardando || cargando"
                             id="btnRegistrar" @click="actualizarAval()">
                             <template v-if="guardando"><i class="fas fa-spinner fa-spin"></i> Guardando</template>
                             <template v-else> Actualizar Aval</template>
                         </button>
                         </button>
-                        <button v-else type="button" class="btn btn-success" id="btnRegistrar" :disabled="guardando"
+                        <button v-else type="button" class="btn btn-success" id="btnRegistrar" :disabled="guardando || cargando"
                             @click="guardarNuevoAval()" >
                             <template v-if="guardando"><i class="fas fa-spinner fa-spin"></i> Guardando</template>
                             <template v-else> Añadir Aval</template>
@@ -132,24 +156,24 @@
                         <table class="table">
                             <thead class="text-primary">
                                 <th>ID Aval</th>
-                                <th>Nombre</th>
-                                <th>Folio INE</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>RFC</th>
                                 <th>ID Cliente</th>
+                                <th>Nombre</th>
+                                <th>Direccion</th>
+                                <th>Folio INE</th>
                                 <th>CURP</th>
+                                <th>RFC</th>
+                                <th>Telefono</th>
                             </thead>
                             <tbody>
                                 <tr class="fila" v-for="(aval, index) in listado" @click="editarAval(index)">
-                                    <td><?php echo "{{ aval.id_aval }}" ?></td>
-                                    <td><?php echo "{{ aval.nombre }}" ?></td>
-                                    <td><?php echo "{{ aval.folio_ine }}" ?></td>
-                                    <td><?php echo "{{ aval.direccion }}" ?></td>
-                                    <td><?php echo "{{ aval.telefono }}" ?></td>
-                                    <td><?php echo "{{ aval.rfc }}" ?></td>
-                                    <td><?php echo "{{ aval.id_cliente }}" ?></td>
-                                    <td><?php echo "{{ aval.curp }}" ?></td>
+                                    <td><?php echo "{{aval.id_aval}}" ?></td>
+                                <td><?php echo "{{aval.id_cliente}}" ?></td>
+                                <td><?php echo "{{aval.nombre}}" ?></td>
+                                <td><?php echo "{{aval.direccion}}" ?></td>
+                                <td><?php echo "{{aval.folio_ine}}" ?></td>
+                                <td><?php echo "{{aval.curp}}" ?></td>
+                                <td><?php echo "{{aval.rfc}}" ?></td>
+                                <td><?php echo "{{aval.telefono}}" ?></td>
                                 </tr>
                             </tbody>
                         </table>

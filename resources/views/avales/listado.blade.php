@@ -19,22 +19,24 @@
       <table class="table">
         <thead class="text-primary">
           <th>ID Aval</th>
-          <th>Folio INE</th>
-          <th>Direccion</th>
-          <th>Telefono</th>
-          <th>RFC</th>
           <th>ID Cliente</th>
+          <th>Nombre</th>
+          <th>Direccion</th>
+          <th>Folio INE</th>
           <th>CURP</th>
+          <th>RFC</th>
+          <th>Telefono</th>
         </thead>
         <tbody>
             <tr class="fila" v-for="(aval, index) in listado" @click="editarAval(index)">
                 <td><?php echo "{{aval.id_aval}}" ?></td>
-                <td><?php echo "{{aval.folio_ine}}" ?></td>
-                <td><?php echo "{{aval.direccion}}" ?></td>
-                <td><?php echo "{{aval.telefono}}" ?></td>
-                <td><?php echo "{{aval.rfc}}" ?></td>
                 <td><?php echo "{{aval.id_cliente}}" ?></td>
+                <td><?php echo "{{aval.nombre}}" ?></td>
+                <td><?php echo "{{aval.direccion}}" ?></td>
+                <td><?php echo "{{aval.folio_ine}}" ?></td>
                 <td><?php echo "{{aval.curp}}" ?></td>
+                <td><?php echo "{{aval.rfc}}" ?></td>
+                <td><?php echo "{{aval.telefono}}" ?></td>
             </tr>
         </tbody>
       </table>

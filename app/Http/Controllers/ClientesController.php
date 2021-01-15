@@ -328,6 +328,16 @@ class ClientesController extends Controller
 
     public function buscar(Request $request){
 
+        if(isset($request->id)){
+            $cliente = Cliente::where('id_cliente', $request->id)
+            ->select('id_cliente AS id', \DB::raw("CONCAT(`id_cliente`, ' - ', `nombre`) AS text"))
+            ->first();
+            if(isset($cliente)){                          
+                return $cliente; //json_encode($retorno);
+            }else{
+                abort(404);
+            }
+        }
         
         $resultados = Cliente::where('nombre', 'LIKE', '%'.$request->busqueda.'%')
         ->orWhere('id_cliente', 'LIKE', '%'.$request->busqueda.'%')
