@@ -1,4 +1,29 @@
 
+$(document).ready(function() {
+    $.fn.select2.defaults.set('language', 'es');
+    $('.select-obj').select2();
+
+
+    $('#selectCliente').select2({
+        maximumInputLength: 100,
+        minimumInputLength: 1,
+        ajax: {
+            url: urlBuscarCliente,
+            dataType: 'json',
+            data: function (params) {
+            var query = {
+                busqueda: params.term,
+                page: params.page || 1
+            }
+            return query;
+            }
+        }
+    });
+
+});
+
+
+
 var app = new Vue({
     el: '#app',
     data: { 

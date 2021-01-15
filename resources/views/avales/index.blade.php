@@ -1,6 +1,11 @@
 @extends('layouts.app_menu')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<!-- Libreria español -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+
 <style>
     .fila:hover {
         background-color: #86CFAD;
@@ -13,6 +18,8 @@
 
 </style>
 <div id="app"> 
+
+
 
     <div class="row justify-content-center" id="app">
 
@@ -27,16 +34,21 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <br>
                     <div class="row justify-content-center">
                         <div class="col-md-6 pr-1">
-                        <!--
+                        <label for="selectCliente">Cliente</label>
+                        <select style="width: 100%;" class="select-obj" id="selectCliente" name="selectCliente">
+                        </select>
+
+                            <!--
                                 <div class="form-group">
                                 <label>Buscar Cliente</label>
                                 <input v-model="modelo.Buscar" type="text" class="form-control"
                                     placeholder="Buscar Cliente" value="" name="buscar" id="txtBox_BuscarCliente"
                                     oninput="BuscarCliente()" />
-                            </div>
-                        -->
+                            </div>-->
+                        
                         </div>
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
@@ -115,6 +127,7 @@
                             class="fas fa-user-plus"></i></button>
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
@@ -157,6 +170,9 @@
     var urlListado = '{{ url('/avales/listado') }}';
     var urlCrear = '{{ url('/avales/crear') }}';
     var urlActualizar = '{{ url('/avales/actualizar') }}';
+
+    var urlBuscarCliente = '{{ url('/clientes/buscarCliente') }}';
+
 
     console.log('{{csrf_token()}}');
 
