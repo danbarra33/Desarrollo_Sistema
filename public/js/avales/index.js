@@ -1,6 +1,4 @@
 
-
-
 $(document).ready(function () {
     $.fn.select2.defaults.set('language', 'es');
     $('.select-obj').select2();
@@ -35,10 +33,6 @@ $(document).ready(function () {
 
 });
 
-//{id: 5, text: "hola"}
-
-
-
 function select2AjaxSetValue(select, url, busqueda, value, callback) {
     $.ajax({
         url: url + "?" + busqueda + "=" + value,
@@ -53,7 +47,6 @@ function select2AjaxSetValue(select, url, busqueda, value, callback) {
         }
     });
 }
-
 
 var app = new Vue({
     el: '#app',

@@ -1,6 +1,10 @@
 @extends('layouts.app_menu')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<!-- Libreria español -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
 
 <div id="app">
 
@@ -12,34 +16,110 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Prestamo</h5>
-                        <h5 v-else class="modal-title" id="exampleModalLabel">Crear Prestamo</h5>
+                        <h5 v-else class="modal-title" id="exampleModalLabel">Solicitar Prestamo</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 pr-1">
-                            <div class="form-group">
-                                <label>Cliente</label>
-                                <input v-model="modelo.id_cliente" type="text" class="form-control"
-                                    placeholder="ID Cliente" value="" name="ID Cliente" id="strID_Cliente" />
-                            </div>
+                    <br>
+                    <div class="container">
+                    <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label for="selectCliente">Cliente</label>
+                            <select :disabled="cargando || modelo.id_prestamo > 0" placeholder="Seleccione" style="width: 100%;" 
+                            class="select-obj" id="selectCliente" name="selectCliente">
+                            </select>
+
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+
+                            <label>Saldo</label>
+                            <input disabled type="text" value="0.00" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+
+                            <label>Salario</label>
+                            <input disabled type="text" value="8,500.00" class="form-control">
+
+                        </div>
+                    </div>                  
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Plazo</label>
+                            <select placeholder="Seleccione" style="width: 100%;" 
+                            class="select-obj" id="select plazo" name="select plazo">
+                            <option value="3">3 Meses</option>
+                            <option value="6">6 Meses</option>
+                            <option value="12">1 Año</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Monto</label>
+                            <input type="number" value="" class="form-control">
+                        </div>          
+                        <div class="col-md-3">
+                            <label>Pago quincenal</label>
+                            <input type="text" value="1,500.00" disabled class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Total a pagar</label>
+                            <input type="text" value="20,000.00" disabled class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Historial Crediticio</label>
+                            <input value="Bueno" disabled type="text" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Identificación</label><br>
+                            <button title="Descargar Identificación." class="btn btn-secondary btn-sm">
+                                <i class="fa fa-download"></i>
+                            </button>
+
+                            
+                        </div>                  
+                        <div class="col-md-3">
+                            <label>C. de domicilio</label><br>
+                            <button title="Descargar comprobane de domicilio." class="btn btn-secondary btn-sm">
+                                <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <label>C. de ingresos</label><br>
+                            <button title="Descargar comprobane de ingresos." class="btn btn-secondary btn-sm">
+                                <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    </div>
+                    <br>
                     <div class="row justify-content-center">
-                        <button data-dismiss="modal" class="btn btn-secondary" href="" id="btnCancelar">
-                            Cancelar
-                        </button>
                         <button v-if="modelo.id > 0" type="button" class="btn btn-success" :disabled="guardando"
                             id="btnRegistrar" @click="actualizarAval()">
                             <template v-if="guardando"><i class="fas fa-spinner fa-spin"></i> Guardando</template>
-                            <template v-else> Actualizar Prestamo</template>
+                            <template v-else> Solicitar Prestamo</template>
                         </button>
                         </button>
                         <button v-else type="button" class="btn btn-success" id="btnRegistrar" :disabled="guardando"
                             @click="guardarNuevoPrestamo()" >
                             <template v-if="guardando"><i class="fas fa-spinner fa-spin"></i> Guardando</template>
-                            <template v-else> Añadir Prestamo</template>
+                            <template v-else> Solicitar </template>
                         </button>
                     </div>
                 </div>
@@ -80,7 +160,7 @@
     </div>
 </div>
 <script>
-
+    var urlBuscarCliente = '{{ url('/clientes/buscarCliente') }}';
 </script>
 <script src="{{ url('/js/prestamos/index.js') }}"></script>
 @endsection
