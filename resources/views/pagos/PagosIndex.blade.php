@@ -23,28 +23,21 @@
                 <!-- <div class="row justify-content-center">  -->
                 <div class="row">
                     <div class="col-md-6 pr-1">
-                        <div><label>Cliente</label></div>
-                        <div class="form-group"> 
-                            <select name="select" class="btn btn-secondary">
-                              <option value="value1">Cliente 1</option>
-                              <option value="value2" selected>Cliente 2</option>
-                              <option value="value3">Cliente 3</option>
-                              <option value="value3">Cliente 4</option>
-                              <option value="value3">Cliente 5</option>
-                              <option value="value3">Cliente 6</option>
+                    <label for="selectCliente">Cliente</label>
+                            <select :disabled="cargando || modelo.pagos > 0" placeholder="Seleccione" style="width: 80%;" 
+                            class="select-obj" id="selectCliente" name="selectCliente">
                             </select>
-                        </div>
                     </div>
                 </div>
                     
                 <div class="row ">
-                    <div class="col-md-4 pr-1">
-                      <label>Saldo</label>
-                        <div class="form-group">
-                          <input  v-model="message" class="form-control" id="SaldoCliente" placeholder="$" readonly >
+                    <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                            <label>Saldo</label>
+                            <input disabled type="text" value="0.00" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-4 pr-1">
+                    <div class="col-md-5 pr-1">
                       <label>Nuevo abono</label>
                         <div class="form-group">
                           <input v-model="message" class="form-control" id="SaldoCliente" placeholder="$">
@@ -53,7 +46,7 @@
                 </div>
 
                 <div class="modal-footer">
-                  <input type="submit" class="btn btn-primary" value="Abonar">
+                  <input type="submit" class="btn btn-success" value="Abonar">
               </div>
               </div>
           </div>
@@ -81,92 +74,20 @@
               <th>Restante</th>
             </thead>
             <tbody>
-              <tr class="fila" v-for="(pago, index) in listado" @click="editarEmpleado(index)">
-                  <td><?php echo "{{pago.id_pago}}" ?></td>
-                  <td><?php echo "{{pago.id_cliente}}" ?></td>
-                  <td><?php echo "{{pago.nombreCliente}}" ?></td>
-                  <td><?php echo "{{pago.id_prestamo}}" ?></td>
-                  <td><?php echo "{{pago.monto}}" ?></td>
-                  <td><?php echo "{{pago.restante}}" ?></td>
+              <tr class="fila" v-for="(Pagos, PagosIndex) in PagosIndex" >
+                  <td><?php echo "{{pagos.id_pago}}" ?></td>
+                  <td><?php echo "{{pagos.id_cliente}}" ?></td>
+                  <td><?php echo "{{pagos.nombreCliente}}" ?></td>
+                  <td><?php echo "{{pagos.id_prestamo}}" ?></td>
+                  <td><?php echo "{{pagos.monto}}" ?></td>
+                  <td><?php echo "{{pagos.restante}}" ?></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--       ----------------------- ESTO SI FUNCIONA ---------------------------
-<div class="row justify-content-center">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Tipos de pago</h4>
-      </div>
-      <div class="card-body">
-        <div>
-        <label>Seleccione método de pago</label>
-        </div>
-
-        <div>
-          <select name="select" class="btn btn-secondary">
-            <option value="value1">Efectivo</option>
-            <option value="value2" selected>Tarjeta de debito</option>
-            <option value="value3">Tarjeta de crédito</option>
-          </select>
-        </div>
-
-        <div>
-          <div class="row">
-            <div class="col-4">
-              <label>Monto a pagar</label>
-              <div class="form-inline">
-                <input type="efectivo" class="form-control" placeholder="Monto" id="evectivo">
-              </div>
-            </div>
-            
-            <div class="col-8">
-              <label>Número de la tarjeta</label>
-              <div class="form-inline">
-                <input type="efectivo" class="form-control" placeholder="0000 0000 0000 0000" id="evectivo">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-        <div class="row">
-          <div class="col-12">
-            <label>Referencia</label>
-              <div class="form-inline">
-                <input type="efectivo" class="form-control" placeholder="Referencia" id="evectivo">
-              </div>
-          </div>
-        </div>
-        </div>
-
-      <button class="btn btn-success btn-block btn-sm">Realizar pago</button>
-
-      </div>
-    </div>
-  </div>
--->
 @endsection
 
 
