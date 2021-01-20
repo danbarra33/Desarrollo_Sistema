@@ -148,4 +148,18 @@ class TiposPagosController extends Controller
         return json_encode($retorno);
     }
 
+    public function select2(){
+        $tiposPago = TipoPago::where('activo', true)
+        ->select('id_tipo_pago AS id', 'tipo AS text')
+        ->get();
+
+        $retorno = (object) array(
+            "results"=>$tiposPago,
+            "pagination"=>(object) array(
+                "more" => false,
+            )
+        );
+        return json_encode($retorno);
+    }
+
 }

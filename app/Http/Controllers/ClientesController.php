@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\View;
 use Session;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Prestamos;
 
 class ClientesController extends Controller
 {
@@ -362,6 +363,16 @@ class ClientesController extends Controller
             )
         );
         return json_encode($retorno);
+    }
+
+    public function saldo(Request $request){
+        if(isset($request->id_cliente)){
+            $saldo = Prestamos::where('id_cliente', $request->id_cliente)
+            ->where('saldo', '>', 0)
+            ->select(\DB::raw('SUM(saldo) AS saldo'))
+            ->first();
+            return $saldo->saldo;
+        }
     }
 
 }

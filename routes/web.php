@@ -29,15 +29,17 @@ Route::post('/pagos/tipos/crear', [TiposPagosController::class, 'nuevo'])->name(
 Route::post('/pagos/tipos/borrar', [TiposPagosController::class, 'borrar'])->name('borrarTiposPagos')->middleware('auth');
 Route::get('/pagos/tipos/listado', [TiposPagosController::class, 'listado'])->name('tiposPagos')->middleware('auth');
 Route::get('/pagos/tipos', [TiposPagosController::class, 'index'])->name('indexTiposPagos')->middleware('auth');
-
+Route::get('/pagos/tipos/select2', [TiposPagosController::class, 'select2'])->name('select2TiposPagos')->middleware('auth');
 // ---------------------------------------------------------------------------------------------
 Route::get('/pagos', [PagosController::class, 'index'])->name('Pagos')->middleware('auth');
+Route::get('/pagos/listar', [PagosController::class, 'listar'])->name('listarPagos')->middleware('auth');
 //Route::get('/pagos ', [PagosController::class, 'listado'])->name('pagoslistado')->middleware('auth');
 // ---------------------------------------------------------------------------------------------
 
 Route::post('/clientes/nuevo', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
 Route::get('/clientes/editar', [ClientesController::class, 'editar'])->name('clientesEditar')->middleware('auth');
 Route::post('/clientes/actualizar', [ClientesController::class, 'actualizar'])->name('clientesActualizar')->middleware('auth');
+Route::get('/clientes/saldo', [ClientesController::class, 'saldo'])->name('saldoCliente')->middleware('auth');
 
 Route::get('/clientes/agregar', function () {
     return view('clients.agregar');
