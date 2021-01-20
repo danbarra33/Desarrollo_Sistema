@@ -13,41 +13,46 @@
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
-              <h4>Crear</h4>
+              <h4>Nuevo pago</h4>
                   <button type="button" class="close" data-dismiss="modal">
                       <span>×</span>
-                  </button>
-                  
+                  </button>  
               </div>
+
               <div class="modal-body">
-                <!-- <div class="row justify-content-center">  -->
-                <div class="row">
-                    <div class="col-md-6 pr-1">
-                    <label for="selectCliente">Cliente</label>
-                            <select :disabled="cargando || modelo.pagos > 0" placeholder="Seleccione" style="width: 80%;" 
-                            class="select-obj" id="selectCliente" name="selectCliente">
-                            </select>
+              <div class="row">
+                    <div class="col-md-5">
+                      <label for="selectCliente">Cliente</label>
+                      <div><select :disabled="cargando || modelo.pagos > 0" placeholder="Seleccione" style="width: 80%;" 
+                        class="select-obj" id="selectCliente" name="selectCliente">
+                        </select></div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                          <label>Saldo</label>
+                          <input disabled type="text" value="0.00" class="form-control">
+                      </div>
                     </div>
                 </div>
                     
-                <div class="row ">
-                    <div class="col-md-5 pr-1">
-                    <div class="form-group">
-                            <label>Saldo</label>
-                            <input disabled type="text" value="0.00" class="form-control">
-                        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Nuevo abono</label>
+                        <input v-model="message" class="form-control" id="SaldoCliente" placeholder="$">
+                      </div>
                     </div>
-                    <div class="col-md-5 pr-1">
-                      <label>Nuevo abono</label>
-                        <div class="form-group">
-                          <input v-model="message" class="form-control" id="SaldoCliente" placeholder="$">
-                        </div>
+                    <div class="col-md-6">
+                    <label for="selectCliente">Método de pago</label>
+                    <div><select :disabled="cargando || modelo.TipoPago > 0" placeholder="Seleccione" style="width: 80%;" 
+                        class="select-obj" id="selectTipoPago" name="selectTipoPago">
+                        </select></div>
+
                     </div>
                 </div>
-
                 <div class="modal-footer">
                   <input type="submit" class="btn btn-success" value="Abonar">
-              </div>
+                </div>
               </div>
           </div>
       </div>
@@ -74,7 +79,7 @@
               <th>Restante</th>
             </thead>
             <tbody>
-              <tr class="fila" v-for="(Pagos, PagosIndex) in PagosIndex" >
+              <tr class="fila" v-for="(Pagos, PagosIndex) in listado" >
                   <td><?php echo "{{pagos.id_pago}}" ?></td>
                   <td><?php echo "{{pagos.id_cliente}}" ?></td>
                   <td><?php echo "{{pagos.nombreCliente}}" ?></td>

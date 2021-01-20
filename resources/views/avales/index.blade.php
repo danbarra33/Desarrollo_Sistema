@@ -162,7 +162,7 @@
                                 <th>Folio INE</th>
                                 <th>CURP</th>
                                 <th>RFC</th>
-                                <th>Telefono</th>
+                                <th>Telefono</th> 
                             </thead>
                             <tbody>
                                 <tr class="fila" v-for="(aval, index) in listado" @click="editarAval(index)">
