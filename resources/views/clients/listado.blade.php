@@ -13,6 +13,7 @@
       <div class="card-header">
         <h4 class="card-title">Clientes</h4>
         <a href="{{url('/clientes/agregar')}}" title="Agregar Cliente" class="btn btn-success"><i class="fas fa-user-plus"></i></a>
+        <a href="" title="Generar Reporte" class="btn btn-outline-success"><i class="fas fa-file-export"></i></a>
       </div>
       <div class="card-body">
         <div class="table-responsive">

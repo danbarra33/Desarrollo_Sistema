@@ -148,6 +148,7 @@
       <div class="card-header">
         <h4 class="card-title">Empleado</h4>
         <button @click="crearEmpleado()" title="Agregar Empleado" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
+        <a href="" title="Generar Reporte" class="btn btn-outline-success"><i class="fas fa-file-export"></i></a>
       </div>
   <div class="card-body">
     <div class="table-responsive">
