@@ -91,7 +91,7 @@
               </a>
             </li>
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'buro') !== false ? 'active' : ''}}">
-              <a href="{{url('/pagos/tipos')}}">
+              <a href="{{url('/BuroCredito')}}">
               <i class="far fa-credit-card"></i>
                 <p>Buró de crédito</p>
               </a>

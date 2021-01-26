@@ -4,8 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BuroCredito;
+use Illuminate\Support\Facades\View;
+
+
+
+
+
+
 
 class BuroCreditoController extends Controller{
+
+    public function index(){
+        return View::make('BuroCredito.index');
+    }
     public function listado(Request $request){
         return json_encode((object) array(
             "codigo" => 1,
@@ -114,5 +125,7 @@ class BuroCreditoController extends Controller{
             return json_encode($retorno);
         }
     }
+
+    
     
 }

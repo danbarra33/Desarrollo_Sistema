@@ -22,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/clientes', [ClientesController::class, 'listado'])->name('clientesListado')->middleware('auth');
 
 Route::post('/pagos/tipos/actualizar', [TiposPagosController::class, 'actualizar'])->name('actualizarTiposPagos')->middleware('auth');
@@ -82,3 +83,5 @@ Route::post('/avales/actualizar', [App\Http\Controllers\AvalesController::class,
 Route::get('/clientes/descargar', [App\Http\Controllers\ClientesController::class, 'descargar'])->name('descargarCliente')->middleware('auth');
 
 Route::get('/prestamos', [App\Http\Controllers\PrestamosController::class, 'index'])->name('prestamos')->middleware('auth');
+
+Route::get('/BuroCredito', [App\Http\Controllers\BuroCreditoController::class, 'index'])->name('BuroCredito')->middleware('auth');
