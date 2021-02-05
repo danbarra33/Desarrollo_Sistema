@@ -37,13 +37,8 @@ $(document).ready(function () {
     });
 
     $('#selectCliente').on('select2:select', function (e) {
-
         var data = e.params.data;
         app.cargarCliente(data.id);
-        /*
-        app.modelo.id_cliente = data.id;
-        console.log(data.id);
-        */
     });
 
 });
@@ -59,7 +54,17 @@ var app = new Vue({
         cargando: false,
         modelo:{
             id_cliente: 0,
-            saldo: 0
+            id_metodo_pago: 0,
+            monto: 0
+        },
+        estadoCliente:{
+            id_cliente: 0,
+            saldo: 0,
+            salario: 0,
+            historial: "",
+            cantidadPrestamos: 1,
+            capitalInicialSucursal: 0,
+            capitalSucursal: 0
         },
         paginacion: {
             current_page:1,
@@ -83,15 +88,61 @@ var app = new Vue({
     },
     methods: {
         cargarCliente: function (id) {
-            // this.modelo.id_cliente = id;
-            // console.log("Se actualizó el ID a " + this.modelo.id_cliente);
-            axios.get(urlCargarCliente+'?id_cliente='+id)
-                .then(response => {
-                    this.modelo.saldo = response.data;
-                })
-                .catch(e => {
-                    console.log(e);
-                })
+            this.estadoCliente.id_cliente = id;
+            this.modelo.id_cliente = id;
+            this.cargando = true;
+
+            axios.get(urlEstadoCliente+"?id_cliente="+id)
+            .then(response => { 
+                this.estadoCliente = {
+                    id_cliente: id,
+                    saldo: response.data.saldo,
+                    salario: response.data.salario,
+                    historial: response.data.historial,
+                    cantidadPrestamos: response.data.cantidadPrestamos,
+                    capitalInicialSucursal: response.data.capitalInicialSucursal,
+                    capitalSucursal: response.data.capitalSucursal
+                }
+                this.cargando = false;
+                this.validar();
+            })
+            .catch(e => {
+                console.log(e);
+                this.cargando = false; 
+            })
+        },
+        validar: function(){
+            
+        },
+        guardar: function(){
+            this.modelo.id_metodo_pago = parseInt($("#selectMetodoPago").val());
+            this.guardando = true;
+            axios.post(urlGuardar, this.modelo)
+            .then(response => {
+                if (response.data.codigo == 1) {
+                    $.notify({
+                        message: response.data.mensaje
+                    }, {
+                        type: 'success',
+                        z_index: 99999
+                    });
+                    this.search();
+                    $('#modalPago').modal('hide');
+
+                } else {
+                    $.notify({
+                        message: response.data.mensaje
+                    }, {
+                        type: 'danger',
+                        z_index: 99999
+                    });
+                }
+                this.guardando = false;
+            })
+            .catch(e => {
+                console.log(e);
+                this.guardando = false;
+            })
         },
         cargarPagos: function (url) {
             axios.get(url)
@@ -144,6 +195,24 @@ var app = new Vue({
             }
             this.cargarPagos(urlListar+'?page='+page+buscar);
         },
+        nuevoPago: function(){
+            this.estadoCliente = {
+                id_cliente: 0,
+                saldo: 0,
+                salario: 0,
+                historial: "",
+                cantidadPrestamos: 1,
+                capitalInicialSucursal: 0,
+                capitalSucursal: 0
+            }
+            this.modelo = {
+                id_cliente: 0,
+                id_metodo_pago: 0,
+                monto: 0
+            };
+            $('#selectCliente').val(null).trigger('change');
+            $('#modalPago').modal('show');
+        }
     }
 });
 

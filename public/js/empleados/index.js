@@ -1,4 +1,3 @@
-
 var app = new Vue({
     el: '#app',
     data: { 
@@ -78,9 +77,47 @@ var app = new Vue({
                 console.log(e);
                 this.guardando = false; 
             })
-        },  
-        cancelarModal: function (){
-            
+        },
+        actualizarEmpleado: function (){
+            this.guardando = true; 
+            axios.post(urlActualizar, this.modelo)
+            .then(response => {
+                if(response.data.codigo == 1){
+                    $.notify({
+                        message: response.data.mensaje 
+                    },{
+                        type: 'success',
+                        z_index : 99999
+                    });
+                    this.cargarEmpleados(urlListado);
+                    $('#modalEmpleado').modal('hide');
+                }else{                 
+                    $.notify({
+                        message: response.data.mensaje 
+                    },{
+                        type: 'danger',
+                        z_index : 99999
+                    });
+                }
+                this.guardando = false;   
+            })
+            .catch(e => {
+                console.log(e);
+                this.guardando = false; 
+            })
+        },
+        editarEmpleado: function(i){
+            this.modelo = {
+                id: this.listado[i].id,
+                name: this.listado[i].name,
+                address: this.listado[i].address,
+                phone: this.listado[i].phone,
+                email: this.listado[i].email,
+                password: '',
+                id_sucursal: this.listado[i].id_sucursal,
+                type_of_user: this.listado[i].type_of_user
+            };
+            $('#modalEmpleado').modal('show');
         }
     }
 });

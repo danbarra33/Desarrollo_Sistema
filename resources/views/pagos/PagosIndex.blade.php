@@ -9,11 +9,11 @@
 
 <div id="app">
   <div class="row justify-content-center" id="app">
-    <div class="modal fade" id="create">
+    <div id="modalPago" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4>Crear</h4>
+            <h4>Abonar a un cliente</h4>
             <button type="button" class="close" data-dismiss="modal">
               <span>×</span>
             </button>
@@ -26,7 +26,7 @@
                 <div class="form-group">
 
                   <label for="selectCliente">Cliente</label>
-                  <select :disabled="cargando || modelo.id_prestamo > 0" placeholder="Seleccione" style="width: 100%;"
+                  <select :disabled="cargando || guardando" placeholder="Seleccione" style="width: 100%;"
                     class="select-obj" id="selectCliente" name="selectCliente">
                   </select>
 
@@ -38,7 +38,7 @@
                 <div class="form-group">
 
                   <label for="selectMetodoPago">Metodo de Pago</label>
-                  <select :disabled="cargando || modelo.id_prestamo > 0" placeholder="Seleccione" style="width: 100%;"
+                  <select :disabled="cargando || guardando > 0" placeholder="Seleccione" style="width: 100%;"
                     class="select-obj" id="selectMetodoPago" name="selectMetodoPago">
                       @foreach ($metodosPago as $metodoPago)
                         <option value="{{$metodoPago->id_tipo_pago}}">{{$metodoPago->tipo}}</option>
@@ -53,20 +53,25 @@
               <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label>Saldo</label>
-                  <input v-model="modelo.saldo" disabled type="text" value="0.00" class="form-control">
+                  <input v-model="estadoCliente.saldo" disabled type="text" value="0.00" class="form-control">
                 </div>
               </div>
               <div class="col-md-5 pr-1">
                 <label>Nuevo abono</label>
                 <div class="form-group">
-                  <input :disabled="modelo.saldo <= 0" class="form-control" id="abonoCliente" placeholder="$">
+                  <input :disabled="estadoCliente.saldo <= 0" type="number" v-model="modelo.monto" class="form-control" id="abonoCliente" placeholder="$">
                 </div>
               </div>
             </div>
 
             <div class="modal-footer">
-              <input :disabled="modelo.saldo <= 0" type="submit" class="btn btn-success" value="Abonar">
+                <button @click="guardar()" class="btn btn-success" :disabled="guardando || cargando || estadoCliente.saldo <= 0 || modelo.monto <= 0 || modelo.monto > estadoCliente.saldo">      
+                  <template v-if="guardando"><i class="fas fa-spinner fa-spin"></i> &nbsp;Guardando</template>
+                  <template v-else-if="cargando"><i class="fas fa-spinner fa-spin"></i> &nbsp;Cargando</template>
+                  <template v-else> Abonar </template>
+                </button>
             </div>
+
           </div>
         </div>
       </div>
@@ -79,8 +84,9 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Pagos</h4>
-          <a href="#" class="btn btn-success pull-left" data-toggle="modal" data-target="#create"><i
-              class="fas fa-plus"></i></a>
+              <button href="#" class="btn btn-success pull-left" @click="nuevoPago()">
+                <i class="fas fa-plus"></i> 
+              </button>
 
               <div class="form-inline my-2 my-lg-0 float-right" style="display: inline-block;">
                   <div class="input-group mb-3">                   
@@ -148,7 +154,8 @@
   var urlListar = '{{ url('/pagos/listar') }}';
   var urlBuscarCliente = '{{ url('/clientes/buscarCliente') }}';
   var urlMetodosPagoSelect2 = '{{ url('/pagos/tipos/select2') }}';
-  var urlCargarCliente = '{{ url('/clientes/saldo') }}';
+  var urlEstadoCliente = '{{ url('/clientes/estado') }}';
+  var urlGuardar = '{{ url('/pagos/guardar') }}';
 </script>
 <script src="{{ url('/js/pagos/index.js') }}"></script>
 @endsection

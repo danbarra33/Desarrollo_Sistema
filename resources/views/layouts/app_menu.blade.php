@@ -83,29 +83,54 @@
               <i class="fas fa-donate"></i>
                 <p>Pagos</p>
               </a>
-            </li>      
+            </li>
+            @if(Auth::user()->type_of_user == 'G')
+            <li class="">
+              <a href="">
+              <i class="fas fa-stamp"></i>
+                <p>Autorizaciones</p>
+              </a>
+            </li>
+            @endif
+            @if(Auth::user()->type_of_user == 'S' || Auth::user()->type_of_user == 'G')
+            <li class="">
+              <a href="">
+              <i class="fas fa-coins"></i>
+                <p>Comisiones</p>
+              </a>
+            </li>
+            @endif
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'clientes') !== false ? 'active' : ''}}">
               <a href="{{url('/clientes')}}">
                 <i class="fas fa-users"></i>
                 <p>Clientes</p>
               </a>
             </li>
+            @if(Auth::user()->type_of_user == 'S' || Auth::user()->type_of_user == 'G')
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'buro') !== false ? 'active' : ''}}">
               <a href="{{url('/BuroCredito')}}">
               <i class="far fa-credit-card"></i>
                 <p>Buró de crédito</p>
               </a>
             </li>
+            @endif
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'avales') !== false ? 'active' : ''}}">
               <a href="{{url('/avales')}}">
                 <i class="fas fa-piggy-bank"></i>
                 <p>Avales</p>
               </a>
             </li>
+            @if(Auth::user()->type_of_user == 'G')
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'empleados') !== false ? 'active' : ''}}">
               <a href="{{url('/empleados')}}">
                 <i class="fas fa-people-carry"></i>
                 <p>Empleados</p>
+              </a>
+            </li>
+            <li class="">
+              <a href="">
+              <i class="fas fa-scroll"></i>
+                <p>Reportes</p>
               </a>
             </li>
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'sucursales') !== false ? 'active' : ''}}">
@@ -113,15 +138,15 @@
                 <i class="fas fa-hotel"></i>
                 <p>Sucursales</p>
               </a>
-            </li>  
-            <meta charset="utf-8" />
+            </li>
+            
             <li class="{{strpos(Route::getCurrentRoute()->getName(), 'indexTiposPagos') !== false ? 'active' : ''}}">
               <a href="{{url('/pagos/tipos')}}">
                 <i class="fas fa-money-bill-wave"></i>
                 <p>Métodos de Pago</p>
               </a>
             </li>
-            
+            @endif
           </ul>
         </div>
       </div>

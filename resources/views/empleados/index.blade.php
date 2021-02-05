@@ -18,7 +18,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Empleados</h5>
+          <h5 v-if="modelo.id > 0" class="modal-title" id="exampleModalLabel">Editar Empleado</h5>
           <h5 v-else class="modal-title" id="exampleModalLabel">Crear Empleado</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -99,25 +99,23 @@
             </div>
             </div>
             <div class="row justify-content-center">
-            <div class="col-md-4 pl-1">
+            <div class="col-md-5">
             <div class="form-group">
-              <label>Sucursal</label>
-                  <select v-model="modelo.id_sucursal">
-                    <option disabled value="">Seleccione una Sucursal</option>
-                    <option>Centro</option>
-                    <option>Barranchos</option>
-                    <option>Etc</option>
+              <label>Sucursal</label><br>
+                  <select v-model="modelo.id_sucursal" style="width: 100%;">
+                    @foreach($sucursales as $sucursal)
+                    <option value="{{$sucursal->id_sucursal}}">{{$sucursal->nombre_empresa}}</option>
+                    @endforeach
                   </select>
             </div>
             </div>
-            <div class="col-md-4 pl-1">
+            <div class="col-md-5">
               <div class="form-group">
-                  <label>Tipo de Usuario</label>
-                  <select v-model="modelo.type_of_user">
-                    <option disabled value="">Seleccione un tipo de empleado</option>
-                    <option>Empleado</option>
-                    <option>Supervisor</option>
-                    <option>Gerente</option>
+                  <label>Tipo de Usuario</label><br>
+                  <select v-model="modelo.type_of_user" style="width: 100%;">
+                    <option value="E">Empleado</option>
+                    <option value="S">Supervisor</option>
+                    <option value="G">Gerente</option>
                   </select>
               </div>
           </div>
@@ -128,7 +126,7 @@
                     Cancelar
                 </button>
                 <button v-if="modelo.id > 0" type="button" class="btn btn-success" :disabled="guardando"
-                id="btnRegistrar" @click="actualizarEmpleado()">
+                id="btnActualizar" @click="actualizarEmpleado()">
                   <template v-if="guardando"><i  class="fas fa-spinner fa-spin"></i> Guardando</template>
                   <template v-else> Actualizar Empleado</template>
                 </button>
@@ -156,20 +154,16 @@
         <thead class="text-primary">
           <th>ID Empleado</th>
           <th>Nombre Completo</th>
-          <th>Domicilio</th>
           <th>Telefono</th>
           <th>Correo Electronico</th>
-          <th>Sucursal</th>
           <th>Tipo de Usuario</th>
         </thead>
         <tbody>
             <tr class="fila" v-for="(empleado, index) in listado" @click="editarEmpleado(index)">
                 <td><?php echo "{{empleado.id}}" ?></td>
                 <td><?php echo "{{empleado.name}}" ?></td>
-                <td><?php echo "{{empleado.address}}" ?></td>
                 <td><?php echo "{{empleado.phone}}" ?></td>
                 <td><?php echo "{{empleado.email}}" ?></td>
-                <td><?php echo "{{empleado.id_sucursal}}" ?></td>
                 <td><?php echo "{{empleado.type_of_user}}" ?></td>
             </tr>
         </tbody>

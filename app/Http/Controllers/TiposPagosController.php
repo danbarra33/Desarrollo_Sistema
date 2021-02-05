@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TipoPago;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class TiposPagosController extends Controller
 {
 
     public function index (Request $request){
+        if(Auth::user()->type_of_user != 'G')
+            return "No tiene permisos para esta funcionalidad.";
         return View::make('pagos.tipos.index');
     }
 

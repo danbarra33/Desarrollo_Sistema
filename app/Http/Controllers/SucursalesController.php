@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Session;
 use App\Models\Sucursal;
+use Illuminate\Support\Facades\Auth;
 
 class SucursalesController extends Controller
 {
     public function index(){
+        if(Auth::user()->type_of_user != 'G')
+            return "No tiene permisos para esta funcionalidad.";
+
         return View::make('sucursales.index');
     }
 

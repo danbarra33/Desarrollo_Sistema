@@ -34,6 +34,7 @@ Route::get('/pagos/tipos/select2', [TiposPagosController::class, 'select2'])->na
 // ---------------------------------------------------------------------------------------------
 Route::get('/pagos', [PagosController::class, 'index'])->name('pagos')->middleware('auth');
 Route::get('/pagos/listar', [PagosController::class, 'listar'])->name('listarPagos')->middleware('auth');
+Route::post('/pagos/guardar', [PagosController::class, 'guardar'])->name('guardarPagos')->middleware('auth');
 //Route::get('/pagos ', [PagosController::class, 'listado'])->name('pagoslistado')->middleware('auth');
 // ---------------------------------------------------------------------------------------------
 
