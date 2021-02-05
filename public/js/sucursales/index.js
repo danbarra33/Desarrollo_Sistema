@@ -10,6 +10,7 @@ var app = new Vue({
             id_sucursal: 0,
             nombre_empresa: '',
             capital: 0,
+            capitalInicial: 0,
             direccion: ''
         }
     }, 
@@ -39,6 +40,7 @@ var app = new Vue({
                 id_sucursal: 0,
                 nombre_empresa: '',
                 capital: 0,
+                capitalInicial: 0,
                 direccion: ''
             };
             $('#modalSucursal').modal('show');
@@ -108,6 +110,7 @@ var app = new Vue({
                 id_sucursal: this.listado[index].id_sucursal,
                 nombre_empresa: this.listado[index].nombre_empresa,
                 capital: this.listado[index].capital,
+                capitalInicial: this.listado[index].capitalInicial,
                 direccion: this.listado[index].direccion
             };
             

@@ -79,7 +79,7 @@
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Método de Pago</h4>
-            <button @click="crear()" title="Agregar Empleado" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
+            <button @click="crear()" title="Agregar Empleado" class="btn btn-success"><i class="fas fa-plus"></i></button>
           </div>
       <div class="card-body">
         <div class="table-responsive">

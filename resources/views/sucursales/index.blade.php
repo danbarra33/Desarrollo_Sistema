@@ -27,7 +27,7 @@
         <div class="modal-body">
             <br>
             <div class="row">
-                <div class="col-md-8 pr-1">
+                <div class="col-md-8">
                 <div class="form-group">
                     <label>Sucursal</label>
                     <input
@@ -41,7 +41,7 @@
                     />
                 </div>
                 </div>
-                <div class="col-md-4 pr-1">
+                <div class="col-md-4">
                 <div class="form-group">
                     <label>Capital</label>
                     <input
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 pr-1">
+                <div class="col-md-8">
                 <div class="form-group">
                     <label>Dirección</label>
                     <input
@@ -71,6 +71,22 @@
                     />
                 </div>
                 </div>
+
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label>Capital Inicial</label>
+                    <input
+                    v-model = "modelo.capitalInicial"
+                    type="number"
+                    class="form-control"
+                    placeholder="Capital"
+                    value=""
+                    name="capitalInicial"
+                    id="intCapitalInicial"
+                    />
+                </div>
+                </div>
+
             </div>
             </div>
             <div class="row d-flex justify-content-center">
@@ -98,7 +114,7 @@
       <div class="card-header">
         <h4 class="card-title">Sucursal</h4>
         
-        <button @click="crearSucursal()" title="Agregar Sucursal" class="btn btn-success"><i class="fas fa-user-plus"></i></button>
+        <button @click="crearSucursal()" title="Agregar Sucursal" class="btn btn-success"><i class="fas fa-plus"></i></button>
       </div>
       <div class="card-body">
         <div class="table-responsive">

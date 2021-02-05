@@ -59,6 +59,14 @@ class SucursalesController extends Controller
                 "sucursal" => null
             );
         }
+
+        if(!isset($request->capitalInicial) || strlen($request->capitalInicial) <= 0){
+            $retorno = (object) array(
+                "codigo" => 0,
+                "mensaje" => "Ingrese el Capital Inicial",
+                "sucursal" => null
+            );
+        }
         
         if(!isset($request->id_sucursal) || strlen($request->id_sucursal) == 0){
             $retorno = (object) array(
@@ -82,6 +90,7 @@ class SucursalesController extends Controller
 
         $sucursal->nombre_empresa = trim($request->nombre_empresa);
         $sucursal->capital = trim($request->capital);
+        $sucursal->capitalInicial = trim($request->capitalInicial);
         $sucursal->direccion = trim($request->direccion);
         //$sucursal->telefono = trim($request->telefono);
         $sucursal->save();
@@ -125,6 +134,7 @@ class SucursalesController extends Controller
         }else{
             $sucursal = new Sucursal();
             $sucursal->capital = (float) trim($request->capital);
+            $sucursal->capitalInicial = (float) trim($request->capitalInicial);
             $sucursal->nombre_empresa = trim($request->nombre_empresa);
             $sucursal->direccion = trim($request->direccion);
             

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\View;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Prestamos;
+use App\Models\BuroCredito;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Sucursal;
 
 class ClientesController extends Controller
 {
@@ -365,13 +368,62 @@ class ClientesController extends Controller
         return json_encode($retorno);
     }
 
-    public function saldo(Request $request){
+    public function estado(Request $request){
         if(isset($request->id_cliente)){
-            $saldo = Prestamos::where('id_cliente', $request->id_cliente)
+
+            $retorno = (object) array(
+                "id_cliente" => $request->id_cliente,
+                "saldo" => (float) 0,
+                "salario" => (float) 0,
+                "historial" => "n",
+                "capitalSucursal" => 0,
+                "capitalInicialSucursal" => 0,
+                "cantidadPrestamos" => 0
+            );
+
+            $id_sucursal = Auth::user()->id_sucursal;
+            if (isset($id_sucursal)){
+                $id_sucursal = 1;
+            }
+
+            $sucursal = Sucursal::where('id_sucursal', $id_sucursal)->first();
+
+            $retorno->capitalSucursal = (float) $sucursal->capital;
+            $retorno->capitalInicialSucursal = (float) $sucursal->capitalInicial;
+
+            $consulta = Prestamos::where('id_cliente', $request->id_cliente)
             ->where('saldo', '>', 0)
             ->select(\DB::raw('SUM(saldo) AS saldo'))
             ->first();
-            return $saldo->saldo;
+
+            if(!isset($consulta->saldo)){
+                $retorno->saldo = (float) 0;
+            }else{
+                $retorno->saldo = (float) $consulta->saldo;
+            }
+
+            $consulta = Prestamos::where('id_cliente', $request->id_cliente)
+            ->select(\DB::raw('COUNT(*) AS cantidadPrestamos'))
+            ->first();
+
+            $retorno->cantidadPrestamos = $consulta->cantidadPrestamos;
+
+            $cliente = Cliente::where('id_cliente', $request->id_cliente)->first();
+            if(!isset($cliente)){
+                $retorno->id_cliente = 0;
+            }else{
+                $retorno->salario = (float) $cliente->salario_mensual;
+            }
+
+            $consulta = BuroCredito::where('id_cliente', $request->id_cliente)
+            ->select('status AS historial')
+            ->first();
+
+            if(isset($consulta->historial)){
+                $retorno->historial = (string) $consulta->historial;
+            }
+
+            return json_encode($retorno);
         }
     }
 

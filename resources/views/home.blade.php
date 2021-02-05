@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    Iniciaste sesión
+                    <div class="col" align="center">
+                    <img src="https://i.pinimg.com/564x/08/13/2f/08132f3ff8f760b99341593d958c3e21.jpg"
+                    width="500" height="500">
+                    </div>
                 </div>
             </div>
         </div>

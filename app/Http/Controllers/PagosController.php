@@ -6,25 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Pagos;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
-
-
+use App\Models\TipoPago;
 
 class PagosController extends Controller
 {
     public function index (Request $request){
-        return View::make('pagos.PagosIndex');
+        $metodosPago = TipoPago::where('activo', true)->get();
+        
+        return View::make('pagos.PagosIndex', compact(['metodosPago']));
     }
     public function listar(Request $request){
 
         $consulta = Pagos::join('clientes AS c', 'pagos.id_cliente', '=', 'c.id_cliente')
         ->select('pagos.*', 'c.nombre AS nombreCliente')
-        ->get();
+        ->where('c.nombre', 'LIKE', "%{$request->busqueda}%")
+        ->orWhere('pagos.monto', 'LIKE', "%{$request->busqueda}%")
+        ->paginate(7);
 
-
-        // $arrListarPagos = \DB::table('pagos')
-        //     ->join('clientes', 'pagos.id_cliente ', '=', 'clientes.id_cliente')
-        //     ->select('pagos.*')
-        //     ->get();
         return json_encode((object) array(
             "codigo" => 1,
             "mensaje" => "",

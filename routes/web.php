@@ -32,7 +32,7 @@ Route::get('/pagos/tipos/listado', [TiposPagosController::class, 'listado'])->na
 Route::get('/pagos/tipos', [TiposPagosController::class, 'index'])->name('indexTiposPagos')->middleware('auth');
 Route::get('/pagos/tipos/select2', [TiposPagosController::class, 'select2'])->name('select2TiposPagos')->middleware('auth');
 // ---------------------------------------------------------------------------------------------
-Route::get('/pagos', [PagosController::class, 'index'])->name('Pagos')->middleware('auth');
+Route::get('/pagos', [PagosController::class, 'index'])->name('pagos')->middleware('auth');
 Route::get('/pagos/listar', [PagosController::class, 'listar'])->name('listarPagos')->middleware('auth');
 //Route::get('/pagos ', [PagosController::class, 'listado'])->name('pagoslistado')->middleware('auth');
 // ---------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Route::get('/pagos/listar', [PagosController::class, 'listar'])->name('listarPag
 Route::post('/clientes/nuevo', [ClientesController::class, 'nuevo'])->name('clientesNuevo')->middleware('auth');
 Route::get('/clientes/editar', [ClientesController::class, 'editar'])->name('clientesEditar')->middleware('auth');
 Route::post('/clientes/actualizar', [ClientesController::class, 'actualizar'])->name('clientesActualizar')->middleware('auth');
-Route::get('/clientes/saldo', [ClientesController::class, 'saldo'])->name('saldoCliente')->middleware('auth');
+Route::get('/clientes/estado', [ClientesController::class, 'estado'])->name('estadoCliente')->middleware('auth');
 
 Route::get('/clientes/agregar', function () {
     return view('clients.agregar');
@@ -83,5 +83,9 @@ Route::post('/avales/actualizar', [App\Http\Controllers\AvalesController::class,
 Route::get('/clientes/descargar', [App\Http\Controllers\ClientesController::class, 'descargar'])->name('descargarCliente')->middleware('auth');
 
 Route::get('/prestamos', [App\Http\Controllers\PrestamosController::class, 'index'])->name('prestamos')->middleware('auth');
+
+Route::get('/prestamos/listado', [App\Http\Controllers\PrestamosController::class, 'listado'])->name('prestamosListado')->middleware('auth');
+
+Route::post('/prestamos/guardar', [App\Http\Controllers\PrestamosController::class, 'guardar'])->name('guardarListado')->middleware('auth');
 
 Route::get('/BuroCredito', [App\Http\Controllers\BuroCreditoController::class, 'index'])->name('BuroCredito')->middleware('auth');

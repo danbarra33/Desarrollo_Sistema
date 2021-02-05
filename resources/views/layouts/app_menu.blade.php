@@ -78,7 +78,7 @@
                 <p>Prestamos</p>
               </a>
             </li>
-            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'PagosIndex') !== false ? 'active' : ''}}">
+            <li class="{{strpos(Route::getCurrentRoute()->getName(), 'pagos') !== false ? 'active' : ''}}">
               <a href="{{url('/pagos')}}">
               <i class="fas fa-donate"></i>
                 <p>Pagos</p>
@@ -207,7 +207,7 @@
     <!-- Chart JS -->
     <script src="{{url('/js/plugins/chartjs.min.js')}}"></script>
     <!--  Notifications Plugin    -->
-    <script src="{{url('/client')}}"></script>
+    <!--<script src="{{url('/client')}}"></script>-->
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{url('/js/now-ui-dashboard.min.js?v=1.5.0')}}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 

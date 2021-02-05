@@ -22,7 +22,7 @@
           <div class="modal-body">
             <!-- <div class="row justify-content-center">  -->
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
 
                   <label for="selectCliente">Cliente</label>
@@ -40,6 +40,9 @@
                   <label for="selectMetodoPago">Metodo de Pago</label>
                   <select :disabled="cargando || modelo.id_prestamo > 0" placeholder="Seleccione" style="width: 100%;"
                     class="select-obj" id="selectMetodoPago" name="selectMetodoPago">
+                      @foreach ($metodosPago as $metodoPago)
+                        <option value="{{$metodoPago->id_tipo_pago}}">{{$metodoPago->tipo}}</option>
+                      @endforeach
                   </select>
 
                 </div>
@@ -77,16 +80,27 @@
         <div class="card-header">
           <h4 class="card-title">Pagos</h4>
           <a href="#" class="btn btn-success pull-left" data-toggle="modal" data-target="#create"><i
-              class="fas fa-user-plus"></i></a>
+              class="fas fa-plus"></i></a>
+
+              <div class="form-inline my-2 my-lg-0 float-right" style="display: inline-block;">
+                  <div class="input-group mb-3">                   
+                      <input ref="search" class="form-control my-2 my-sm-0 w-50" type="search" placeholder="Buscar" aria-label="Search" 
+                      v-on:keyup.enter.prevent="search()" v-model="busqueda">
+                      <div class="input-group-prepend">
+                          <button :disabled="cargando" class="btn btn-success my-2 my-sm-0 rounded-right" type="button" @click.prevent="search()">
+                              <i class="fas fa-search fa-lg"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>   
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
               <thead class="text-primary">
-                <th>id_pago</th>
-                <th>id_cliente</th>
-                <th>Nombre Cliente</th>
-                <th>id_prestamo</th>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>ID Prestamo</th>
                 <th>Monto</th>
                 <th>Restante</th>
               </thead>
@@ -94,9 +108,6 @@
                 <tr class="fila" v-for="(pagos, index) in listado">
                   <td>
                     <?php echo "{{pagos.id_pago}}" ?>
-                  </td>
-                  <td>
-                    <?php echo "{{pagos.id_cliente}}" ?>
                   </td>
                   <td>
                     <?php echo "{{pagos.nombreCliente}}" ?>
@@ -114,6 +125,20 @@
               </tbody>
             </table>
           </div>
+          <template v-if="paginacion.total / paginacion.per_page > 1">
+              <b-pagination
+              :disabled ="lcargando"
+              @input = "(page) => paginateClick(page)"
+              v-model="paginacion.current_page"
+              :total-rows="paginacion.total"
+              :per-page="paginacion.per_page"
+              :limit="6"
+              first-number
+              last-number
+              align="center"
+              >
+              </b-pagination>
+          </template>
         </div>
       </div>
     </div>
